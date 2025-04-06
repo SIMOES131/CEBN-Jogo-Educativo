@@ -131,3 +131,83 @@ button {
   background-color: #2196f3;
   color: white;
 }
+
+
+/* Responsividade para tablets e celulares */
+@media (max-width: 768px) {
+  H1 {
+    font-size: 28px;
+    padding: 10px;
+  }
+
+  #player {
+    width: 100px;
+    height: 100px;
+    left: 50px;
+  }
+
+  #question {
+    top: 200px;
+    width: 90%;
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .option {
+    font-size: 14px;
+    padding: 8px 12px;
+    bottom: 50px;
+  }
+
+  #score {
+    font-size: 14px;
+    padding: 8px;
+    margin-top: 20px;
+  }
+
+  #startBtn {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  #restartBtn {
+    font-size: 14px;
+    width: 120px;
+    padding: 10px 20px;
+    top: 130px;
+  }
+
+  #status {
+    top: 10px;
+    right: 10px;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  H1 {
+    font-size: 24px;
+  }
+
+  #player {
+    width: 80px;
+    height: 80px;
+    left: 30px;
+  }
+
+  .option {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  #question {
+    font-size: 12px;
+  }
+
+  #startBtn,
+  #restartBtn {
+    font-size: 12px;
+    padding: 8px 16px;
+    width: 100px;
+  }
+}
