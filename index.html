@@ -6,19 +6,27 @@
   <title>Jogo de Perguntas</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
 <body>
-  <div id="game">
-    <img id="player" src="./assets/personagem.png.png" alt="Personagem" />
-    <div id="question"></div>
-    <div id="score">Pontos: 0</div>
-    <!--<div id="status">
-      <div id="erros">Erros: 0/3</div>
-      <div id="pulos">Pulos: 3/3</div>
-    </div>-->
+  <div class="container">
+   
+    <div id="game">
+      <h1>CENTRO EDUCACIONAL DE BARRA NOVA</h1>
+      <img id="player" src="./assets/personagem.png.png" alt="Personagem" />
+      <div id="question"></div>
+      <div id="score">Pontos: 0</div>
+      <!--<div id="status">
+        <div id="erros">Erros: 0/3</div>
+        <div id="pulos">Pulos: 3/3</div>
+      </div>-->
+    </div>
+  
+    <button id="startBtn">Iniciar</button>
+    <button id="restartBtn" style="display: none;">Reiniciar</button>
   </div>
-
-  <button id="startBtn">Iniciar</button>
-  <button id="restartBtn" style="display: none;">Reiniciar</button>
+  
 
   <script src="questions.js"></script>
   <script src="script.js"></script>

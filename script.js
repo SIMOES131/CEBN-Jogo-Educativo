@@ -40,6 +40,7 @@ Object.assign(erroEl.style, {
   fontSize: '16px',
   fontWeight: 'bold',
   padding: '10px 20px',
+  marginTop: '80px',
   borderRadius: '8px',
   boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
   textAlign: 'center',
@@ -66,13 +67,6 @@ infoContainer.appendChild(restartBtn);
 // Carrega nova pergunta
 function loadQuestion() {
   answeredCorrectly = false;
-
-  if (currentQuestionIndex >= questions.length) {
-    questionEl.innerText = "Parabéns! Você venceu! 🎉";
-    restartBtn.style.display = "block";
-    return;
-  }
-
   const q = questions[currentQuestionIndex];
   questionEl.innerText = q.question;
 
@@ -82,7 +76,7 @@ function loadQuestion() {
     const div = document.createElement('div');
     div.classList.add('option');
     div.innerText = opt;
-    div.style.left = `${1000 + i * 600}px`;
+    div.style.left = `${3000 + i * 2500}px`;
     div.dataset.correct = opt === q.answer;
     game.appendChild(div);
   });
@@ -133,7 +127,7 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// Novo: Detecta clique no personagem para pulo
+// Detecta clique no personagem para pulo
 player.addEventListener('click', () => {
   jump();
 });
@@ -189,15 +183,25 @@ function gameLoop() {
 // Avança para próxima pergunta
 function nextQuestion() {
   currentQuestionIndex++;
-  loadQuestion();
+  if (currentQuestionIndex < questions.length) {
+    loadQuestion();
+  } else {
+    victory();
+  }
+}
+
+// Vitória do jogo
+function victory() {
+  questionEl.innerText = `🎉 Parabéns, você venceu!\nPontuação final: ${score}`;
+  document.querySelectorAll('.option').forEach(el => el.remove());
+  restartBtn.style.display = "block";
 }
 
 // Fim do jogo
 function gameOver() {
-  questionEl.innerText = "Você perdeu! 😢";
+  questionEl.innerText = "Que pena você não conseguiu! Tente novamente! 😢";
   document.querySelectorAll('.option').forEach(el => el.remove());
   restartBtn.style.display = "block";
-  jogoIniciado = false;
 }
 
 // Reiniciar o jogo
@@ -209,9 +213,7 @@ restartBtn.addEventListener('click', () => {
   erroEl.innerText = `Erros: ${erros}/${maxErros}`;
   scoreEl.innerText = `Pontos: ${score}`;
   restartBtn.style.display = "none";
-  jogoIniciado = true;
   loadQuestion();
-  gameLoop();
 });
 
 // Iniciar o jogo
