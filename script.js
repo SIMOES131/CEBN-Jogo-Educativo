@@ -126,6 +126,11 @@ document.addEventListener('keydown', e => {
   }
 });
 
+// Novo: Detecta clique no personagem para pulo
+player.addEventListener('click', () => {
+  jump();
+});
+
 // Verifica colisão entre jogador e opções
 function checkCollision(option) {
   const playerRect = player.getBoundingClientRect();
