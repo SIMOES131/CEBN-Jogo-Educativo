@@ -66,6 +66,13 @@ infoContainer.appendChild(restartBtn);
 // Carrega nova pergunta
 function loadQuestion() {
   answeredCorrectly = false;
+
+  if (currentQuestionIndex >= questions.length) {
+    questionEl.innerText = "Parabéns! Você venceu! 🎉";
+    restartBtn.style.display = "block";
+    return;
+  }
+
   const q = questions[currentQuestionIndex];
   questionEl.innerText = q.question;
 
@@ -182,11 +189,7 @@ function gameLoop() {
 // Avança para próxima pergunta
 function nextQuestion() {
   currentQuestionIndex++;
-  if (currentQuestionIndex < questions.length) {
-    loadQuestion();
-  } else {
-    location.reload();
-  }
+  loadQuestion();
 }
 
 // Fim do jogo
@@ -194,6 +197,7 @@ function gameOver() {
   questionEl.innerText = "Você perdeu! 😢";
   document.querySelectorAll('.option').forEach(el => el.remove());
   restartBtn.style.display = "block";
+  jogoIniciado = false;
 }
 
 // Reiniciar o jogo
@@ -205,7 +209,9 @@ restartBtn.addEventListener('click', () => {
   erroEl.innerText = `Erros: ${erros}/${maxErros}`;
   scoreEl.innerText = `Pontos: ${score}`;
   restartBtn.style.display = "none";
+  jogoIniciado = true;
   loadQuestion();
+  gameLoop();
 });
 
 // Iniciar o jogo
