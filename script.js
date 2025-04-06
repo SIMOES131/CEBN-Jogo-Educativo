@@ -2,6 +2,8 @@ const game = document.getElementById("game");
 const player = document.getElementById("player");
 const questionEl = document.getElementById("question");
 const scoreEl = document.getElementById("score");
+
+
 const startBtn = document.getElementById("startBtn");
 
 let jogoIniciado = false;
@@ -15,6 +17,18 @@ let score = 0;
 let jumping = false;
 let gravity = window.innerWidth < 600 ? 2 : 4;
 let answeredCorrectly = false;
+
+// 🎵 Sons do jogo
+const trilhaAudio = new Audio('trilha.mp3');
+const somPulo = new Audio('pulo.mp3');
+const somAcerto = new Audio('acerto.mp3');
+const somErro = new Audio('erro.mp3');
+
+trilhaAudio.loop = true;
+trilhaAudio.volume = 0.3;
+somPulo.volume = 0.7;
+somAcerto.volume = 1.0;
+somErro.volume = 1.0;
 
 // Função para embaralhar perguntas
 function embaralhar(array) {
@@ -45,7 +59,7 @@ erroEl.innerText = `Erros: ${erros}/${maxErros}`;
 Object.assign(erroEl.style, {
   backgroundColor: '#2196f3',
   color: '#fff',
-  fontSize: '16px',
+  fontSize: '20px',
   fontWeight: 'bold',
   padding: '10px 20px',
   marginTop: '80px',
@@ -62,9 +76,9 @@ restartBtn.innerText = "Reiniciar";
 Object.assign(restartBtn.style, {
   display: "none",
   padding: "12px 24px",
-  fontSize: "18px",
+  fontSize: "20px",
   borderRadius: "8px",
-  backgroundColor: "#2196f3",
+  backgroundColor: "#00FF00",
   color: "#fff",
   border: "none",
   cursor: "pointer",
@@ -86,6 +100,7 @@ function loadQuestion() {
     div.innerText = opt;
     div.style.left = `${3000 + i * 2500}px`;
     div.dataset.correct = opt === q.answer;
+
     game.appendChild(div);
   });
 
@@ -101,11 +116,14 @@ function loadQuestion() {
 // Pulo do jogador
 function jump() {
   if (!jumping && pulosRestantes > 0) {
+    somPulo.currentTime = 0;
+    somPulo.play();
+
     pulosRestantes--;
     jumping = true;
     let jumpHeight = 0;
     const maxJump = 400;
-    const jumpSpeed = 15;
+    const jumpSpeed = 17;
 
     const jumpInterval = setInterval(() => {
       if (jumpHeight >= maxJump) {
@@ -165,11 +183,17 @@ function gameLoop() {
 
     if (checkCollision(opt)) {
       if (opt.dataset.correct === "true" && player.offsetTop >= 300) {
+        somAcerto.currentTime = 0;
+        somAcerto.play();
+
         score += 100;
         scoreEl.innerText = `Pontos: ${score}`;
         answeredCorrectly = true;
         nextQuestion();
       } else if (opt.dataset.correct === "false" && player.offsetTop >= 300) {
+        somErro.currentTime = 0;
+        somErro.play();
+
         erros++;
         erroEl.innerText = `Erros: ${erros}/${maxErros}`;
         if (erros >= maxErros) gameOver();
@@ -178,6 +202,9 @@ function gameLoop() {
     }
 
     if (left < -100 && !answeredCorrectly && opt.dataset.correct === "true") {
+      somErro.currentTime = 0;
+      somErro.play();
+
       erros++;
       erroEl.innerText = `Erros: ${erros}/${maxErros}`;
       if (erros >= maxErros) gameOver();
@@ -200,6 +227,9 @@ function nextQuestion() {
 
 // Vitória do jogo
 function victory() {
+  trilhaAudio.pause();
+  trilhaAudio.currentTime = 0;
+
   questionEl.innerText = `🎉 Parabéns, você venceu!\nPontuação final: ${score}`;
   document.querySelectorAll('.option').forEach(el => el.remove());
   restartBtn.style.display = "block";
@@ -207,6 +237,9 @@ function victory() {
 
 // Fim do jogo
 function gameOver() {
+  trilhaAudio.pause();
+  trilhaAudio.currentTime = 0;
+
   questionEl.innerText = "Que pena você não conseguiu! Tente novamente! 😢";
   document.querySelectorAll('.option').forEach(el => el.remove());
   restartBtn.style.display = "block";
@@ -222,6 +255,7 @@ restartBtn.addEventListener('click', () => {
   erroEl.innerText = `Erros: ${erros}/${maxErros}`;
   scoreEl.innerText = `Pontos: ${score}`;
   restartBtn.style.display = "none";
+  trilhaAudio.play();
   loadQuestion();
 });
 
@@ -236,6 +270,7 @@ startBtn.addEventListener('click', () => {
     pulosRestantes = maxPulos;
     scoreEl.innerText = `Pontos: ${score}`;
     erroEl.innerText = `Erros: ${erros}/${maxErros}`;
+    trilhaAudio.play();
     loadQuestion();
     gameLoop();
     startBtn.style.display = "none";
