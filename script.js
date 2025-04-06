@@ -13,8 +13,16 @@ const maxPulos = 3;
 let currentQuestionIndex = 0;
 let score = 0;
 let jumping = false;
-let gravity = 4;
+let gravity = window.innerWidth < 600 ? 2 : 4;
 let answeredCorrectly = false;
+
+// Função para embaralhar perguntas
+function embaralhar(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
 
 // Criar container de informações do jogo
 const infoContainer = document.createElement('div');
@@ -206,6 +214,7 @@ function gameOver() {
 
 // Reiniciar o jogo
 restartBtn.addEventListener('click', () => {
+  embaralhar(questions);
   currentQuestionIndex = 0;
   score = 0;
   erros = 0;
@@ -220,6 +229,13 @@ restartBtn.addEventListener('click', () => {
 startBtn.addEventListener('click', () => {
   if (!jogoIniciado) {
     jogoIniciado = true;
+    embaralhar(questions);
+    currentQuestionIndex = 0;
+    score = 0;
+    erros = 0;
+    pulosRestantes = maxPulos;
+    scoreEl.innerText = `Pontos: ${score}`;
+    erroEl.innerText = `Erros: ${erros}/${maxErros}`;
     loadQuestion();
     gameLoop();
     startBtn.style.display = "none";
