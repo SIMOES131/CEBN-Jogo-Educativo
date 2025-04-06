@@ -1,0 +1,187 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f0f0f0;
+}
+
+#game {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #333;
+  overflow: hidden;
+}
+
+#player {
+  position: absolute;
+  bottom: 50px;
+  left: 100px;
+  width: 120px;
+  height: 120px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+img {
+  padding: 10px;
+  max-width: 100%;
+  height: auto;
+}
+
+.jump {
+  animation: jump 0.6s ease;
+}
+
+@keyframes jump {
+  0% { bottom: 50px; }
+  50% { bottom: 150px; }
+  100% { bottom: 50px; }
+}
+
+.option {
+  position: absolute;
+  bottom: 50px;
+  width: auto;
+  padding: 10px 20px;
+  background-color: #00bcd4;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  white-space: nowrap;
+  font-size: 16px;
+}
+
+#question {
+  position: absolute;
+  top: 300px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 20px;
+  max-width: 90%;
+  box-sizing: border-box;
+}
+
+#score {
+  background: #ffc107;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px;
+  font-weight: bold;
+  display: inline-block;
+  font-size: 16px;
+}
+
+#status {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  max-width: 90%;
+}
+
+#startBtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #28a745;
+  color: white;
+}
+
+#restartBtn {
+  position: absolute;
+  top: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2196f3;
+  color: white;
+}
+
+/* RESPONSIVIDADE */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  #player {
+    width: 100px;
+    height: 100px;
+    left: 60px;
+  }
+
+  .option {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  #question {
+    font-size: 18px;
+    top: 250px;
+  }
+}
+
+/* Smartphones */
+@media (max-width: 768px) {
+  #player {
+    width: 80px;
+    height: 80px;
+    left: 40px;
+  }
+
+  .option {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  #question {
+    font-size: 16px;
+    top: 220px;
+  }
+
+  #score {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  #startBtn, #restartBtn {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}
+
+/* Smartphones menores (ex: iPhone SE) */
+@media (max-width: 480px) {
+  #player {
+    width: 60px;
+    height: 60px;
+    left: 30px;
+  }
+
+  .option {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+
+  #question {
+    font-size: 14px;
+    top: 200px;
+  }
+
+  #score {
+    font-size: 12px;
+  }
+}
