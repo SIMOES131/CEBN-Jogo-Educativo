@@ -104,7 +104,7 @@ function jump() {
     pulosRestantes--;
     jumping = true;
     let jumpHeight = 0;
-    const maxJump = 500;
+    const maxJump = 400;
     const jumpSpeed = 15;
 
     const jumpInterval = setInterval(() => {
