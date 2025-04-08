@@ -2,8 +2,6 @@ const game = document.getElementById("game");
 const player = document.getElementById("player");
 const questionEl = document.getElementById("question");
 const scoreEl = document.getElementById("score");
-
-
 const startBtn = document.getElementById("startBtn");
 
 let jogoIniciado = false;
@@ -38,7 +36,46 @@ function embaralhar(array) {
   }
 }
 
-// Criar container de informações do jogo
+/// Balão de fala antes do jogo (aparece depois de um tempo)
+const speechBubble = document.createElement('div');
+speechBubble.innerText = 'Olá! Eu sou aluno do CEBN e desenvolvi este jogo para que possamos aprender de forma divertida.';
+Object.assign(speechBubble.style, {
+  display: 'none', // começa invisível
+  bottom: '0px',
+  marginRight: '0px',
+  marginLeft: '-37%',
+  marginBottom: '16%',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  backgroundColor: '#fff',
+  border: '2px solid #333',
+  borderRadius: '15px',
+  padding: '15px 20px',
+  fontSize: '18px',
+  maxWidth: '320px',
+  textAlign: 'center',
+  boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+  zIndex: 1000,
+  position: 'absolute'
+});
+game.appendChild(speechBubble);
+
+// Mostra o balão depois de 3 segundos
+setTimeout(() => {
+  speechBubble.style.display = 'block';
+
+  // Esconde o balão após 15 segundos, caso o jogo ainda não tenha começado
+  setTimeout(() => {
+    if (!jogoIniciado) {
+      speechBubble.style.display = "none";
+    }
+  }, 15000);
+
+}, 3000); // aparece depois de 3 segundos
+
+
+
+// Container de informações do jogo
 const infoContainer = document.createElement('div');
 Object.assign(infoContainer.style, {
   position: 'absolute',
@@ -78,11 +115,13 @@ Object.assign(restartBtn.style, {
   padding: "12px 24px",
   fontSize: "20px",
   borderRadius: "8px",
+  marginTop: "240px",
   backgroundColor: "#00FF00",
   color: "#fff",
   border: "none",
   cursor: "pointer",
-  width: "150px"
+  width: "120px",
+  textAlign: "center"
 });
 infoContainer.appendChild(restartBtn);
 
@@ -98,7 +137,7 @@ function loadQuestion() {
     const div = document.createElement('div');
     div.classList.add('option');
     div.innerText = opt;
-    div.style.left = `${3000 + i * 2500}px`;
+    div.style.left = `${2500 + i * 2000}px`;
     div.dataset.correct = opt === q.answer;
 
     game.appendChild(div);
@@ -263,6 +302,7 @@ restartBtn.addEventListener('click', () => {
 startBtn.addEventListener('click', () => {
   if (!jogoIniciado) {
     jogoIniciado = true;
+    speechBubble.style.display = "none"; // 👈 Esconde o balão
     embaralhar(questions);
     currentQuestionIndex = 0;
     score = 0;
