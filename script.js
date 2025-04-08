@@ -17,9 +17,9 @@ let gravity = window.innerWidth < 600 ? 2 : 4;
 let answeredCorrectly = false;
 
 // 🎵 Sons do jogo
-const trilhaAudio = new Audio('trilha.mp3');
-const somPulo = new Audio('pulo.mp3');
-const somAcerto = new Audio('acerto.mp3');
+const trilhaAudio = new Audio('trilha2.mp3');
+const somPulo = new Audio('pulo2.mp3');
+const somAcerto = new Audio('acerto2.mp3');
 const somErro = new Audio('erro.mp3');
 
 trilhaAudio.loop = true;
