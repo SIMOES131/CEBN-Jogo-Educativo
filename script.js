@@ -44,7 +44,7 @@ Object.assign(speechBubble.style, {
   bottom: '0px',
   marginRight: '0px',
   marginLeft: '-15%',
-  marginBottom: '35%',
+  marginBottom: '45%',
   left: '50%',
   transform: 'translateX(-50%)',
   backgroundColor: '#fff',
