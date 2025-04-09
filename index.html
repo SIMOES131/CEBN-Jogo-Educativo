@@ -8,27 +8,31 @@
 </head>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Permanent+Marker&display=swap" rel="stylesheet">
 <body>
   <div class="container">
-   
-    <div id="game">
-      <h1>CENTRO EDUCACIONAL DE BARRA NOVA</h1>
-      <img id="player" src="./assets/personagem.png.png" alt="Personagem" />
-      <div id="question"></div>
-      <div id="score">Pontos: 0</div>
-      <!--<div id="status">
-        <div id="erros">Erros: 0/3</div>
-        <div id="pulos">Pulos: 3/3</div>
-      </div>-->
-    </div>
-  
-    <button id="startBtn">Iniciar</button>
-    <button id="restartBtn" style="display: none;">Reiniciar</button>
+    <h1>CENTRO EDUCACIONAL DE BARRA NOVA</h1>
+
+<div id="game">
+<!--<div id="player"></div>-->
+<img id="player" src="./assets/personagem.png.png" alt="Personagem">
+  <div id="question-container">
+    <div id="question"></div>
   </div>
-  
+  <div id="score">Pontos: 0</div>
+  <div id="errors">Erros: 0</div>
+  <div id="feedback-msg"></div>
+</div>
+
+<button id="startBtn">Iniciar</button>
+<button id="restartBtn">Reiniciar</button>
+<div id="message" class="hidden"></div>
+  </div>
 
   <script src="questions.js"></script>
   <script src="script.js"></script>
 </body>
+
+
+
 </html>

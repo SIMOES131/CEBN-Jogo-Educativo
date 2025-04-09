@@ -2,12 +2,13 @@ const game = document.getElementById("game");
 const player = document.getElementById("player");
 const questionEl = document.getElementById("question");
 const scoreEl = document.getElementById("score");
+const errorsEl = document.getElementById("errors");
 const startBtn = document.getElementById("startBtn");
+const restartBtn = document.getElementById("restartBtn");
 
 let jogoIniciado = false;
 let erros = 0;
 const maxErros = 3;
-
 let pulosRestantes = 3;
 const maxPulos = 3;
 let currentQuestionIndex = 0;
@@ -15,20 +16,47 @@ let score = 0;
 let jumping = false;
 let gravity = window.innerWidth < 600 ? 2 : 4;
 let answeredCorrectly = false;
+let respondeuNaRodada = false;
 
-// 🎵 Sons do jogo
+// Sons do jogo
 const trilhaAudio = new Audio('trilha2.mp3');
 const somPulo = new Audio('pulo2.mp3');
 const somAcerto = new Audio('acerto2.mp3');
 const somErro = new Audio('erro.mp3');
 
 trilhaAudio.loop = true;
-trilhaAudio.volume = 0.3;
+trilhaAudio.volume = 1.0;
 somPulo.volume = 0.7;
 somAcerto.volume = 1.0;
 somErro.volume = 1.0;
 
-// Função para embaralhar perguntas
+// Feedback visual (mensagem)
+const mensagemFeedback = document.createElement('div');
+mensagemFeedback.style.position = 'fixed';
+mensagemFeedback.style.left = '50%';
+mensagemFeedback.style.transform = 'translateX(-50%)';
+mensagemFeedback.style.padding = '10px 20px';
+mensagemFeedback.style.fontSize = '24px';
+mensagemFeedback.style.color = '#fff';
+mensagemFeedback.style.borderRadius = '10px';
+mensagemFeedback.style.display = 'none';
+mensagemFeedback.style.zIndex = '9999';
+document.body.appendChild(mensagemFeedback);
+
+// Posiciona a mensagem inicialmente na altura do botão iniciar
+const startBtnTop = startBtn.getBoundingClientRect().top;
+mensagemFeedback.style.top = `${startBtnTop - 60}px`;
+
+function mostrarMensagem(texto, cor) {
+  mensagemFeedback.innerText = texto;
+  mensagemFeedback.style.backgroundColor = cor;
+  mensagemFeedback.style.display = 'block';
+  setTimeout(() => {
+    mensagemFeedback.style.display = 'none';
+  }, 1000);
+}
+
+// Embaralha as perguntas
 function embaralhar(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -36,112 +64,28 @@ function embaralhar(array) {
   }
 }
 
-/// Balão de fala antes do jogo (aparece depois de um tempo)
-const speechBubble = document.createElement('div');
-speechBubble.innerText = 'Olá! Eu sou aluno do CEBN e desenvolvi este jogo para que possamos aprender de forma divertida.';
-Object.assign(speechBubble.style, {
-  display: 'none', // começa invisível
-  bottom: '0px',
-  marginRight: '0px',
-  marginLeft: '-15%',
-  marginBottom: '45%',
-  left: '50%',
-  transform: 'translateX(-50%)',
-  backgroundColor: '#fff',
-  border: '2px solid #333',
-  borderRadius: '15px',
-  padding: '15px 20px',
-  fontSize: '18px',
-  maxWidth: '200px',
-  textAlign: 'center',
-  boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
-  zIndex: 1000,
-  position: 'absolute'
-});
-game.appendChild(speechBubble);
-
-// Mostra o balão depois de 3 segundos
-setTimeout(() => {
-  speechBubble.style.display = 'block';
-
-  // Esconde o balão após 15 segundos, caso o jogo ainda não tenha começado
-  setTimeout(() => {
-    if (!jogoIniciado) {
-      speechBubble.style.display = "none";
-    }
-  }, 15000);
-
-}, 3000); // aparece depois de 3 segundos
-
-
-
-// Container de informações do jogo
-const infoContainer = document.createElement('div');
-Object.assign(infoContainer.style, {
-  position: 'absolute',
-  top: '60px',
-  left: '50%',
-  transform: 'translateX(-50%)',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: '10px'
-});
-document.body.appendChild(infoContainer);
-
-// Exibição de erros
-const erroEl = document.createElement('div');
-erroEl.id = 'erros';
-erroEl.innerText = `Erros: ${erros}/${maxErros}`;
-Object.assign(erroEl.style, {
-  backgroundColor: '#2196f3',
-  color: '#fff',
-  fontSize: '20px',
-  fontWeight: 'bold',
-  padding: '10px 20px',
-  marginTop: '80px',
-  borderRadius: '8px',
-  boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
-  textAlign: 'center',
-  display: 'inline-block'
-});
-infoContainer.appendChild(erroEl);
-
-// Botão de reiniciar
-const restartBtn = document.createElement("button");
-restartBtn.innerText = "Reiniciar";
-Object.assign(restartBtn.style, {
-  display: "none",
-  padding: "12px 24px",
-  fontSize: "20px",
-  borderRadius: "8px",
-  marginTop: "240px",
-  backgroundColor: "#00FF00",
-  color: "#fff",
-  border: "none",
-  cursor: "pointer",
-  width: "120px",
-  textAlign: "center"
-});
-infoContainer.appendChild(restartBtn);
-
 // Carrega nova pergunta
 function loadQuestion() {
   answeredCorrectly = false;
+  respondeuNaRodada = false;
   const q = questions[currentQuestionIndex];
   questionEl.innerText = q.question;
 
   document.querySelectorAll('.option').forEach(el => el.remove());
 
+setTimeout(() => {
   q.options.forEach((opt, i) => {
     const div = document.createElement('div');
     div.classList.add('option');
     div.innerText = opt;
-    div.style.left = `${2500 + i * 2000}px`;
+    div.style.left = `${window.innerWidth + (i * 1500)}px`;
+    div.style.top = '50%';
     div.dataset.correct = opt === q.answer;
-
     game.appendChild(div);
   });
+}, 4000);
+
+  
 
   if (currentQuestionIndex > 0 && currentQuestionIndex % 10 === 0) {
     let nivel = "Fácil";
@@ -161,8 +105,8 @@ function jump() {
     pulosRestantes--;
     jumping = true;
     let jumpHeight = 0;
-    const maxJump = 400;
-    const jumpSpeed = 17;
+    const maxJump = 500;
+    const jumpSpeed = 10;
 
     const jumpInterval = setInterval(() => {
       if (jumpHeight >= maxJump) {
@@ -185,23 +129,16 @@ function jump() {
   }
 }
 
-// Detecta tecla espaço para pulo
+// Controles
 document.addEventListener('keydown', e => {
-  if (e.code === 'Space') {
-    jump();
-  }
+  if (e.code === 'Space') jump();
 });
+player.addEventListener('click', jump);
 
-// Detecta clique no personagem para pulo
-player.addEventListener('click', () => {
-  jump();
-});
-
-// Verifica colisão entre jogador e opções
+// Verifica colisão
 function checkCollision(option) {
   const playerRect = player.getBoundingClientRect();
   const optRect = option.getBoundingClientRect();
-
   return (
     playerRect.left < optRect.right &&
     playerRect.right > optRect.left &&
@@ -212,107 +149,135 @@ function checkCollision(option) {
 
 // Loop principal do jogo
 function gameLoop() {
-  if (!jogoIniciado) return;
-
   const options = document.querySelectorAll('.option');
+
   options.forEach(opt => {
     let left = parseInt(opt.style.left);
-    left -= 2;
+    left -= 4;
     opt.style.left = `${left}px`;
 
-    if (checkCollision(opt)) {
-      if (opt.dataset.correct === "true" && player.offsetTop >= 300) {
-        somAcerto.currentTime = 0;
-        somAcerto.play();
-
-        score += 100;
-        scoreEl.innerText = `Pontos: ${score}`;
-        answeredCorrectly = true;
-        nextQuestion();
-      } else if (opt.dataset.correct === "false" && player.offsetTop >= 300) {
-        somErro.currentTime = 0;
-        somErro.play();
-
-        erros++;
-        erroEl.innerText = `Erros: ${erros}/${maxErros}`;
-        if (erros >= maxErros) gameOver();
-        else nextQuestion();
+    if (left < -100) {
+      opt.remove();
+      if (opt.dataset.correct === "true" && !answeredCorrectly && !respondeuNaRodada) {
+        respondeuNaRodada = true;
+        mostrarMensagem("❌ Resposta Errada!", "red");
+        handleError();
       }
     }
 
-    if (left < -100 && !answeredCorrectly && opt.dataset.correct === "true") {
-      somErro.currentTime = 0;
-      somErro.play();
+    if (!respondeuNaRodada && checkCollision(opt)) {
+      respondeuNaRodada = true;
 
-      erros++;
-      erroEl.innerText = `Erros: ${erros}/${maxErros}`;
-      if (erros >= maxErros) gameOver();
-      else nextQuestion();
+      if (opt.dataset.correct === "true") {
+        mostrarMensagem("✅ Resposta Certa!", "green");
+        handleCorrectAnswer();
+      } else {
+        mostrarMensagem("❌ Resposta Errada!", "red");
+        handleError();
+      }
+
+      document.querySelectorAll('.option').forEach(el => el.remove());
     }
   });
 
-  requestAnimationFrame(gameLoop);
+  if (jogoIniciado) requestAnimationFrame(gameLoop);
 }
 
-// Avança para próxima pergunta
-function nextQuestion() {
+
+
+
+
+// Adicione esta variável no início do seu script
+const messageEl = document.getElementById('message');
+
+function showMessage(text, duration = 1500) {
+  messageEl.textContent = text;
+  messageEl.classList.remove('hidden');
+  
+  setTimeout(() => {
+    messageEl.classList.add('hidden');
+  }, duration);
+}
+
+function handleCorrectAnswer() {
+  somAcerto.play();
+  score += 100;
+  scoreEl.innerText = `Pontos: ${score}`;
+  answeredCorrectly = true;
   currentQuestionIndex++;
+
   if (currentQuestionIndex < questions.length) {
-    loadQuestion();
+    showMessage("✅ Resposta Correta! +100 pontos");
+    setTimeout(() => {
+      loadQuestion();
+    }, 800);
   } else {
-    victory();
+    showMessage("🎉 Parabéns! Você respondeu todas as perguntas!", 3000);
+    setTimeout(() => {
+      endGame();
+    }, 3000);
   }
 }
 
-// Vitória do jogo
-function victory() {
-  trilhaAudio.pause();
-  trilhaAudio.currentTime = 0;
+function handleError() {
+  somErro.play();
+  erros++;
+  errorsEl.innerText = `Erros: ${erros} / ${maxErros}`;
+  currentQuestionIndex++;
 
-  questionEl.innerText = `🎉 Parabéns, você venceu!\nPontuação final: ${score}`;
-  document.querySelectorAll('.option').forEach(el => el.remove());
-  restartBtn.style.display = "block";
+  if (erros >= maxErros) {
+    showMessage("💀 Game Over! Tente novamente.", 3000);
+    setTimeout(() => {
+      endGame();
+    }, 3000);
+  } else {
+    showMessage("❌ Resposta Errada!");
+    if (currentQuestionIndex < questions.length) {
+      setTimeout(() => {
+        loadQuestion();
+      }, 800);
+    } else {
+      showMessage("🎉 Parabéns! Você respondeu todas as perguntas!", 3000);
+      setTimeout(() => {
+        endGame();
+      }, 3000);
+    }
+  }
 }
 
-// Fim do jogo
-function gameOver() {
+// Modifique a função endGame para não receber mais a mensagem como parâmetro
+function endGame() {
+  jogoIniciado = false;
+  restartBtn.style.display = 'block';
   trilhaAudio.pause();
-  trilhaAudio.currentTime = 0;
-
-  questionEl.innerText = "Que pena você não conseguiu! Tente novamente! 😢";
-  document.querySelectorAll('.option').forEach(el => el.remove());
-  restartBtn.style.display = "block";
 }
 
-// Reiniciar o jogo
-restartBtn.addEventListener('click', () => {
-  embaralhar(questions);
-  currentQuestionIndex = 0;
-  score = 0;
-  erros = 0;
-  pulosRestantes = maxPulos;
-  erroEl.innerText = `Erros: ${erros}/${maxErros}`;
-  scoreEl.innerText = `Pontos: ${score}`;
-  restartBtn.style.display = "none";
-  trilhaAudio.play();
-  loadQuestion();
-});
+
+
+
+
+
 
 // Iniciar o jogo
 startBtn.addEventListener('click', () => {
-  if (!jogoIniciado) {
-    jogoIniciado = true;
-    speechBubble.style.display = "none"; // 👈 Esconde o balão
-    embaralhar(questions);
-    currentQuestionIndex = 0;
-    score = 0;
-    erros = 0;
-    pulosRestantes = maxPulos;
-    scoreEl.innerText = `Pontos: ${score}`;
-    erroEl.innerText = `Erros: ${erros}/${maxErros}`;
-    trilhaAudio.play();
-    loadQuestion();
-    gameLoop();
-    startBtn.style.display = "none";
-  }
+  embaralhar(questions);
+  jogoIniciado = true;
+  score = 0;
+  erros = 0;
+  currentQuestionIndex = 0;
+  scoreEl.innerText = "Pontos: 0";
+  errorsEl.innerText = `Erros: 0 / ${maxErros}`;
+  restartBtn.style.display = 'none';
+  trilhaAudio.play();
+  loadQuestion();
+  gameLoop();
+  startBtn.style.display = 'none';
 });
+
+// Reiniciar o jogo
+restartBtn.addEventListener('click', () => {
+  window.location.reload();
+});
+
+// Inicia o loop do jogo
+gameLoop();
