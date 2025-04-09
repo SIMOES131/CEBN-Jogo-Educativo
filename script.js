@@ -20,9 +20,9 @@ let respondeuNaRodada = false;
 
 // Configurações responsivas
 const isMobile = window.innerWidth < 600;
-let velocidadeOpcoes = isMobile ? 2 : 4;
-let gravity = isMobile ? 2 : 4;
-const espacamentoOpcoes = isMobile ? 800 : 1500;
+let velocidadeOpcoes = isMobile ? 1 : 2;
+let gravity = isMobile ? 1 : 2;
+const espacamentoOpcoes = isMobile ? 1000 : 1000;
 
 // Sons do jogo
 const trilhaAudio = new Audio('trilha2.mp3');
