@@ -1,4 +1,4 @@
-/* Estilos base (mobile-first) */
+/* style.css - Versão Otimizada para Mobile */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -11,97 +11,99 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
   width: 100%;
   height: 100vh;
   position: relative;
+  overflow: hidden;
 }
 
 h1 {
   font-family: "Permanent Marker", cursive;
   text-align: center;
   margin: 0;
-  padding: 10px 0;
-  font-size: 1.5rem;
+  padding: 8px 0;
+  font-size: 1.3rem;
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 5;
 }
 
 #game {
   position: relative;
   width: 100%;
-  height: calc(100vh - 60px);
+  height: calc(100% - 50px);
   overflow: hidden;
 }
 
+/* Personagem totalmente visível */
 #player {
   position: absolute;
-  bottom: 10%; /* Posição relativa à altura da tela */
-  left: 20px;
-  width: 70px; /* Tamanho reduzido para mobile */
-  height: 70px;
+  bottom: 80px; /* Posição fixa garantindo visibilidade */
+  left: 25px;
+  width: 60px;
+  height: 60px;
   background-color: #fff;
   border-radius: 50%;
   z-index: 10;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  /* Garante que o personagem não ultrapasse os limites */
-  max-width: 25vw; /* Limita o tamanho máximo relativo à largura da tela */
-  max-height: 25vw;
 }
 
-
-
-
-
+/* Container de Pergunta */
 #question-container {
   position: absolute;
-  top: 60px;
+  top: 50px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255, 255, 255, 0.9);
   color: #000;
   padding: 10px 15px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
   width: 90%;
-  max-width: 500px;
+  max-width: 400px;
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.95rem;
   z-index: 2;
 }
 
+/* Opções de Resposta */
 .option {
   position: absolute;
   background: dodgerblue;
   color: white;
   padding: 8px 15px;
   border-radius: 15px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   z-index: 5;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   white-space: nowrap;
   transform: translateY(-50%);
 }
 
+/* Placar e Erros */
 #score, #errors {
   position: absolute;
-  top: 10px;
-  font-size: 0.9rem;
-  padding: 5px 10px;
+  top: 8px;
+  font-size: 0.85rem;
+  padding: 6px 12px;
   border-radius: 5px;
   font-weight: bold;
   z-index: 10;
 }
 
 #score {
-  left: 10px;
+  left: 8px;
   background-color: rgba(9, 74, 46, 0.8);
 }
 
 #errors {
-  right: 10px;
+  right: 8px;
   background-color: rgba(192, 57, 43, 0.8);
 }
 
@@ -111,10 +113,11 @@ h1 {
 
 @keyframes pulse {
   0% { transform: scale(1); background-color: #e74c3c; }
-  50% { transform: scale(1.15); background-color: #ff6b6b; }
+  50% { transform: scale(1.1); background-color: #ff6b6b; }
   100% { transform: scale(1); background-color: #c0392b; }
 }
 
+/* Botões */
 #startBtn, #restartBtn {
   position: absolute;
   top: 50%;
@@ -123,28 +126,29 @@ h1 {
   padding: 10px 20px;
   font-size: 1rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
   background-color: #2980b9;
   color: white;
   z-index: 20;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
 #restartBtn {
   display: none;
 }
 
+/* Mensagens de Feedback */
 #feedback-msg {
   position: absolute;
-  top: 40%;
+  top: 35%;
   left: 50%;
   transform: translateX(-50%);
   font-size: 1.1rem;
   font-weight: bold;
   color: white;
-  padding: 8px 15px;
-  border-radius: 5px;
+  padding: 8px 16px;
+  border-radius: 6px;
   z-index: 15;
   display: none;
   background: rgba(0, 0, 0, 0.7);
@@ -159,7 +163,7 @@ h1 {
   color: white;
   padding: 15px 25px;
   border-radius: 8px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   z-index: 1000;
   text-align: center;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
@@ -175,123 +179,110 @@ h1 {
   to { opacity: 1; }
 }
 
-/* Media Queries para tablets */
+/* ========== MEDIA QUERIES ========== */
+
+/* Tablets */
 @media (min-width: 600px) {
   h1 {
-    font-size: 2rem;
-    padding: 15px 0;
+    font-size: 1.8rem;
+    padding: 12px 0;
   }
 
   #player {
-    width: 80px !important;
-    height: 80px !important;
-    bottom: 20%;
-    top: 400px;
-    left: 50px;
+    width: 80px;
+    height: 80px;
+    bottom: 100px;
+    left: 40px;
   }
 
-
   #question-container {
-    top: 80px;
-    padding: 15px 20px;
-    font-size: 1.2rem;
+    top: 70px;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    max-width: 500px;
   }
 
   .option {
-    padding: 10px 20px;
-    font-size: 1.1rem;
+    padding: 10px 18px;
+    font-size: 1rem;
   }
 
   #score, #errors {
-    font-size: 1.1rem;
+    font-size: 1rem;
     padding: 8px 15px;
   }
 
   #startBtn, #restartBtn {
-    padding: 12px 25px;
-    font-size: 1.2rem;
+    padding: 12px 24px;
+    font-size: 1.1rem;
   }
 
   #feedback-msg {
     font-size: 1.3rem;
   }
-
-  #message {
-    padding: 20px 30px;
-    font-size: 1.5rem;
-  }
 }
 
-/* Media Queries para desktops */
+/* Desktops */
 @media (min-width: 900px) {
   h1 {
-    font-size: 2.5rem;
-    padding: 20px 0;
+    font-size: 2.2rem;
+    padding: 15px 0;
   }
 
   #player {
-    width: 120px;
-    height: 120px;
-    bottom: 20%;
-    left: 80px;
+    width: 100px;
+    height: 100px;
+    bottom: 120px;
+    left: 60px;
   }
 
   #question-container {
-    top: 100px;
-    padding: 20px 30px;
-    font-size: 1.5rem;
-    max-width: 700px;
+    top: 90px;
+    padding: 15px 25px;
+    font-size: 1.3rem;
+    max-width: 600px;
   }
 
   .option {
-    padding: 12px 25px;
-    font-size: 1.3rem;
-  }
-
-  #score, #errors {
-    top: 20px;
-    font-size: 1.3rem;
-    padding: 10px 20px;
+    padding: 12px 22px;
+    font-size: 1.1rem;
   }
 
   #startBtn, #restartBtn {
-    padding: 15px 30px;
-    font-size: 1.3rem;
-  }
-
-  #feedback-msg {
-    font-size: 1.5rem;
-  }
-
-  #message {
-    padding: 25px 40px;
-    font-size: 1.8rem;
+    padding: 14px 28px;
+    font-size: 1.2rem;
   }
 }
 
-/* Ajustes para telas muito largas */
+/* Telas muito grandes */
 @media (min-width: 1200px) {
   #player {
-    left: 150px;
+    left: 100px;
   }
 }
 
-/* Orientação paisagem em dispositivos móveis */
+/* Modo Paisagem (Mobile) */
 @media (max-height: 500px) and (orientation: landscape) {
   #game {
     height: calc(100vh - 40px);
   }
 
   h1 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     padding: 5px 0;
   }
 
   #player {
     width: 50px;
     height: 50px;
-    bottom: 10%;
-    left: 15px;
+    bottom: 60px;
+    left: 20px;
+  }
+
+  #question-container {
+    top: 40px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
   }
 
   #score, #errors {
