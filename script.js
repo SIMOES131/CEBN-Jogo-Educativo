@@ -19,9 +19,9 @@ let answeredCorrectly = false;
 let respondeuNaRodada = false;
 
 // Configurações responsivas
-const isMobile = window.innerWidth < 600;
-let velocidadeOpcoes = isMobile ? 1 : 2;
-let gravity = isMobile ? 2 : 4;
+const isMobile = window.innerWidth < 400;
+let velocidadeOpcoes = isMobile ? 1 : 1;
+let gravity = isMobile ? 4 : 8;
 const espacamentoOpcoes = isMobile ? 1000 : 1000;
 
 // Sons do jogo

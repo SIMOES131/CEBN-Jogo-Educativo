@@ -38,14 +38,17 @@ h1 {
 
 #player {
   position: absolute;
-  bottom: 50px;
-  left: 30px;
-  width: 150px !important;
-  height: 150px !important;
+  bottom: 10%; /* Posição relativa à altura da tela */
+  left: 20px;
+  width: 70px; /* Tamanho reduzido para mobile */
+  height: 70px;
   background-color: #fff;
   border-radius: 50%;
   z-index: 10;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  /* Garante que o personagem não ultrapasse os limites */
+  max-width: 25vw; /* Limita o tamanho máximo relativo à largura da tela */
+  max-height: 25vw;
 }
 
 
@@ -227,11 +230,10 @@ h1 {
   }
 
   #player {
-    width: 100px;
-    height: 100px !important;
-    bottom: 100px !important;
-    left: 100px;
-    top: 300px;
+    width: 120px;
+    height: 120px;
+    bottom: 20%;
+    left: 80px;
   }
 
   #question-container {
@@ -285,18 +287,11 @@ h1 {
     padding: 5px 0;
   }
 
-  #question-container {
-    top: 2px;
-    padding: 8px 12px;
-    font-size: 0.9rem;
-  }
-
   #player {
     width: 50px;
-    height: 50px !important;
-    bottom: 50px !important;
-    top: 300px;
-
+    height: 50px;
+    bottom: 10%;
+    left: 15px;
   }
 
   #score, #errors {
