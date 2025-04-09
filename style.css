@@ -189,6 +189,7 @@ h1 {
     bottom: 20%;
     top: 400px;
     left: 50px;
+    margin-top: 250px;
   }
 
 
@@ -212,6 +213,7 @@ h1 {
   #startBtn, #restartBtn {
     padding: 12px 25px;
     font-size: 1.2rem;
+    margin-top: 130px;
   }
 
   #feedback-msg {
@@ -235,7 +237,7 @@ h1 {
     width: 120px;
     height: 120px;
     bottom: 20%;
-    margin-top: 100px;
+    margin-top: 250px;
     left: 80px;
   }
 
@@ -295,16 +297,22 @@ h1 {
     height: 50px;
     bottom: 10%;
     left: 15px;
-    margin-top: 70px;
+    margin-top: 2500px;
   }
 
   .option {
     padding: 10px 20px;
     font-size: 1.1rem;
-    top: 100px;
+    top: 10px;
   }
 
   #score, #errors {
     font-size: 0.8rem;
+  }
+
+  #startBtn, #restartBtn {
+    padding: 15px 30px;
+    font-size: 1.3rem;
+    margin-top: 130px;
   }
 }
