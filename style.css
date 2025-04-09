@@ -185,7 +185,7 @@ h1 {
   #player {
     width: 80px !important;
     height: 80px !important;
-    bottom: 100px;
+    bottom: 20%;
     top: 400px;
     left: 50px;
   }
