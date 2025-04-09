@@ -1,4 +1,4 @@
-/* style.css - Versão Otimizada para Mobile */
+/* Estilos base (mobile-first) */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -11,99 +11,98 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  display: flex;
-  flex-direction: column;
 }
 
 .container {
   width: 100%;
   height: 100vh;
   position: relative;
-  overflow: hidden;
 }
 
 h1 {
   font-family: "Permanent Marker", cursive;
   text-align: center;
   margin: 0;
-  padding: 8px 0;
-  font-size: 1.3rem;
+  padding: 10px 0;
+  font-size: 1.5rem;
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  position: relative;
-  z-index: 5;
 }
 
 #game {
   position: relative;
   width: 100%;
-  height: calc(100% - 50px);
+  height: calc(100vh - 60px);
   overflow: hidden;
 }
 
-/* Personagem totalmente visível */
 #player {
-  position: absolute;
-  bottom: 80px; /* Posição fixa garantindo visibilidade */
-  left: 25px;
-  width: 60px;
-  height: 60px;
+  position: relative;
+  margin-bottom: 1px; /* Posição relativa à altura da tela */
+  margin-top: 120px;
+  left: 20px;
+  width: 80px; /* Tamanho reduzido para mobile */
+  height: 70px;
   background-color: #fff;
   border-radius: 50%;
   z-index: 10;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  /* Garante que o personagem não ultrapasse os limites */
+  max-width: 25vw; /* Limita o tamanho máximo relativo à largura da tela */
+  max-height: 25vw;
 }
 
-/* Container de Pergunta */
+
+
+
+
 #question-container {
   position: absolute;
-  top: 50px;
+  top: 60px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255, 255, 255, 0.9);
   color: #000;
   padding: 10px 15px;
   border-radius: 10px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   width: 90%;
-  max-width: 400px;
+  max-width: 500px;
   text-align: center;
-  font-size: 0.95rem;
+  font-size: 1rem;
   z-index: 2;
 }
 
-/* Opções de Resposta */
 .option {
   position: absolute;
   background: dodgerblue;
   color: white;
   padding: 8px 15px;
   border-radius: 15px;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   z-index: 5;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   white-space: nowrap;
   transform: translateY(-50%);
 }
 
-/* Placar e Erros */
 #score, #errors {
   position: absolute;
-  top: 8px;
-  font-size: 0.85rem;
-  padding: 6px 12px;
+  top: 10px;
+  font-size: 0.9rem;
+  padding: 5px 10px;
   border-radius: 5px;
   font-weight: bold;
   z-index: 10;
 }
 
 #score {
-  left: 8px;
+  left: 10px;
   background-color: rgba(9, 74, 46, 0.8);
 }
 
 #errors {
-  right: 8px;
+  right: 10px;
   background-color: rgba(192, 57, 43, 0.8);
 }
 
@@ -113,11 +112,10 @@ h1 {
 
 @keyframes pulse {
   0% { transform: scale(1); background-color: #e74c3c; }
-  50% { transform: scale(1.1); background-color: #ff6b6b; }
+  50% { transform: scale(1.15); background-color: #ff6b6b; }
   100% { transform: scale(1); background-color: #c0392b; }
 }
 
-/* Botões */
 #startBtn, #restartBtn {
   position: absolute;
   top: 50%;
@@ -126,29 +124,28 @@ h1 {
   padding: 10px 20px;
   font-size: 1rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: pointer;
   background-color: #2980b9;
   color: white;
   z-index: 20;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 #restartBtn {
   display: none;
 }
 
-/* Mensagens de Feedback */
 #feedback-msg {
   position: absolute;
-  top: 35%;
+  top: 40%;
   left: 50%;
   transform: translateX(-50%);
   font-size: 1.1rem;
   font-weight: bold;
   color: white;
-  padding: 8px 16px;
-  border-radius: 6px;
+  padding: 8px 15px;
+  border-radius: 5px;
   z-index: 15;
   display: none;
   background: rgba(0, 0, 0, 0.7);
@@ -163,7 +160,7 @@ h1 {
   color: white;
   padding: 15px 25px;
   border-radius: 8px;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   z-index: 1000;
   text-align: center;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
@@ -179,125 +176,132 @@ h1 {
   to { opacity: 1; }
 }
 
-/* ========== MEDIA QUERIES ========== */
-
-/* Tablets */
+/* Media Queries para tablets */
 @media (min-width: 600px) {
-
-  .container {
-    width: 100%;
-    height: 80vh;
-    position: relative;
-    overflow: hidden;
-  }
-  
   h1 {
-    font-size: 1.8rem;
-    padding: 12px 0;
+    font-size: 2rem;
+    padding: 15px 0;
   }
 
   #player {
-    width: 80px;
-    height: 80px;
-    bottom: 100px;
-    left: 40px;
+    width: 80px !important;
+    height: 80px !important;
+    bottom: 20%;
+    top: 400px;
+    left: 50px;
   }
 
+
   #question-container {
-    top: 70px;
-    padding: 12px 20px;
-    font-size: 1.1rem;
-    max-width: 500px;
+    top: 80px;
+    padding: 15px 20px;
+    font-size: 1.2rem;
   }
 
   .option {
-    padding: 10px 18px;
-    font-size: 1rem;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    top: 100px;
   }
 
   #score, #errors {
-    font-size: 1rem;
+    font-size: 1.1rem;
     padding: 8px 15px;
   }
 
   #startBtn, #restartBtn {
-    padding: 12px 24px;
-    font-size: 1.1rem;
+    padding: 12px 25px;
+    font-size: 1.2rem;
   }
 
   #feedback-msg {
     font-size: 1.3rem;
   }
+
+  #message {
+    padding: 20px 30px;
+    font-size: 1.5rem;
+  }
 }
 
-/* Desktops */
+/* Media Queries para desktops */
 @media (min-width: 900px) {
   h1 {
-    font-size: 2.2rem;
-    padding: 15px 0;
+    font-size: 2.5rem;
+    padding: 20px 0;
   }
 
   #player {
-    width: 100px;
-    height: 100px;
-    bottom: 120px;
-    left: 60px;
+    width: 120px;
+    height: 120px;
+    bottom: 20%;
+    margin-top: 100px;
+    left: 80px;
   }
 
   #question-container {
-    top: 90px;
-    padding: 15px 25px;
-    font-size: 1.3rem;
-    max-width: 600px;
+    top: 100px;
+    padding: 20px 30px;
+    font-size: 1.5rem;
+    max-width: 700px;
   }
 
   .option {
-    padding: 12px 22px;
-    font-size: 1.1rem;
+    padding: 12px 25px;
+    font-size: 1.3rem;
+  }
+
+  #score, #errors {
+    top: 20px;
+    font-size: 1.3rem;
+    padding: 10px 20px;
   }
 
   #startBtn, #restartBtn {
-    padding: 14px 28px;
-    font-size: 1.2rem;
+    padding: 15px 30px;
+    font-size: 1.3rem;
+  }
+
+  #feedback-msg {
+    font-size: 1.5rem;
+  }
+
+  #message {
+    padding: 25px 40px;
+    font-size: 1.8rem;
   }
 }
 
-/* Telas muito grandes */
+/* Ajustes para telas muito largas */
 @media (min-width: 1200px) {
   #player {
-    left: 100px;
+    left: 150px;
   }
 }
 
-/* Modo Paisagem (Mobile) */
+/* Orientação paisagem em dispositivos móveis */
 @media (max-height: 500px) and (orientation: landscape) {
-  .container {
-    width: 100%;
-    height: 80vh;
-    position: relative;
-    overflow: hidden;
-  }
-  
   #game {
     height: calc(100vh - 40px);
   }
 
   h1 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     padding: 5px 0;
   }
 
   #player {
     width: 50px;
     height: 50px;
-    bottom: 60px;
-    left: 20px;
+    bottom: 10%;
+    left: 15px;
+    margin-top: 70px;
   }
 
-  #question-container {
-    top: 40px;
-    padding: 8px 12px;
-    font-size: 0.9rem;
+  .option {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    top: 100px;
   }
 
   #score, #errors {
