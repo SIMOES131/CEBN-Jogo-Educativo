@@ -39,7 +39,7 @@ h1 {
 /* PERSONAGEM - AJUSTE PRINCIPAL PARA MOBILE */
 #player {
   position: absolute;
-  bottom: 120px; /* Aumentei de 80px para 120px para subir o personagem */
+  bottom: 200px; /* Aumentei de 80px para 120px para subir o personagem */
   left: 30px;
   width: 70px;
   height: 70px;
@@ -161,7 +161,7 @@ h1 {
   #player {
     width: 90px;
     height: 90px;
-    bottom: 100px; /* Mantido para tablets */
+    bottom: 200px; /* Mantido para tablets */
     left: 50px;
   }
 
@@ -220,7 +220,7 @@ h1 {
   #player {
     width: 60px;
     height: 60px;
-    bottom: 100px; /* Ajuste para landscape */
+    bottom: 200px; /* Ajuste para landscape */
     left: 25px;
   }
 
