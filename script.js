@@ -59,6 +59,9 @@ function mostrarMensagem(texto, cor) {
   setTimeout(() => mensagemFeedback.style.display = 'none', 1000);
 }
 
+
+
+
 function embaralhar(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -95,7 +98,10 @@ function loadQuestion() {
   }
 }
 
-// CORREÇÃO DA LÓGICA DE PULO
+
+
+
+// LÓGICA DE PULO
 function jump() {
   if (!jogoIniciado || jumping || pulosRestantes <= 0) return;
 
@@ -104,7 +110,7 @@ function jump() {
   pulosRestantes--;
   jumping = true;
 
-  const posicaoBase = 100; // posição original do personagem
+  const posicaoBase = 105; // posição original do personagem
   let jumpHeight = 0;
   const maxJump = isMobile ? 400 : 500;
   const jumpSpeed = isMobile ? 15 : 10;
