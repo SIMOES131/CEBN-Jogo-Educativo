@@ -104,7 +104,7 @@ function jump() {
   pulosRestantes--;
   jumping = true;
 
-  const posicaoBase = 150; // posição original do personagem
+  const posicaoBase = 120; // posição original do personagem
   let jumpHeight = 0;
   const maxJump = isMobile ? 400 : 500;
   const jumpSpeed = isMobile ? 15 : 10;
