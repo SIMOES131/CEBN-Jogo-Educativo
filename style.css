@@ -1,4 +1,4 @@
-/* style.css - Versão Corrigida */
+/* style.css - Versão com Personagem Ajustado para Mobile */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -36,23 +36,23 @@ h1 {
   overflow: hidden;
 }
 
-/* Personagem corrigido - visível em todas as telas */
+/* PERSONAGEM - AJUSTE PRINCIPAL PARA MOBILE */
 #player {
   position: absolute;
-  bottom: 80px;
+  bottom: 120px; /* Aumentei de 80px para 120px para subir o personagem */
   left: 30px;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   background-color: #fff;
   border-radius: 50%;
   z-index: 10;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Container de pergunta ajustado */
+/* CONTAINER DE PERGUNTA */
 #question-container {
   position: absolute;
-  top: 70px;
+  top: 60px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255, 255, 255, 0.9);
@@ -67,6 +67,7 @@ h1 {
   z-index: 2;
 }
 
+/* RESPOSTAS */
 .option {
   position: absolute;
   background: dodgerblue;
@@ -80,6 +81,7 @@ h1 {
   transform: translateY(-50%);
 }
 
+/* PLACAR */
 #score, #errors {
   position: absolute;
   top: 10px;
@@ -110,6 +112,7 @@ h1 {
   100% { transform: scale(1); background-color: #c0392b; }
 }
 
+/* BOTÕES */
 #startBtn, #restartBtn {
   position: absolute;
   top: 50%;
@@ -130,6 +133,7 @@ h1 {
   display: none;
 }
 
+/* MENSAGENS */
 #feedback-msg {
   position: absolute;
   top: 40%;
@@ -145,34 +149,9 @@ h1 {
   background: rgba(0, 0, 0, 0.7);
 }
 
-#message {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 15px 25px;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  z-index: 1000;
-  text-align: center;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-  max-width: 90%;
-}
-
-.hidden {
-  display: none;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
 /* ========== MEDIA QUERIES ========== */
 
-/* Tablets */
+/* TABLETS (acima de 600px) */
 @media (min-width: 600px) {
   h1 {
     font-size: 2rem;
@@ -180,14 +159,14 @@ h1 {
   }
 
   #player {
-    width: 100px;
-    height: 100px;
-    bottom: 100px;
+    width: 90px;
+    height: 90px;
+    bottom: 100px; /* Mantido para tablets */
     left: 50px;
   }
 
   #question-container {
-    top: 90px;
+    top: 80px;
     padding: 15px 20px;
     font-size: 1.2rem;
   }
@@ -196,19 +175,9 @@ h1 {
     padding: 10px 20px;
     font-size: 1.1rem;
   }
-
-  #score, #errors {
-    font-size: 1.1rem;
-    padding: 8px 15px;
-  }
-
-  #startBtn, #restartBtn {
-    padding: 12px 25px;
-    font-size: 1.2rem;
-  }
 }
 
-/* Desktops */
+/* DESKTOPS (acima de 900px) */
 @media (min-width: 900px) {
   h1 {
     font-size: 2.5rem;
@@ -216,33 +185,28 @@ h1 {
   }
 
   #player {
-    width: 120px;
-    height: 120px;
-    bottom: 120px;
+    width: 110px;
+    height: 110px;
+    bottom: 120px; /* Mantido para desktops */
     left: 80px;
   }
 
   #question-container {
-    top: 110px;
+    top: 100px;
     padding: 20px 30px;
     font-size: 1.5rem;
     max-width: 700px;
   }
-
-  .option {
-    padding: 12px 25px;
-    font-size: 1.3rem;
-  }
 }
 
-/* Telas muito grandes */
+/* TELAS MUITO GRANDES (acima de 1200px) */
 @media (min-width: 1200px) {
   #player {
     left: 120px;
   }
 }
 
-/* Modo Paisagem (Mobile) */
+/* MODO PAISAGEM (CELULAR) */
 @media (max-height: 500px) and (orientation: landscape) {
   #game {
     height: calc(100vh - 40px);
@@ -254,15 +218,15 @@ h1 {
   }
 
   #player {
-    width: 70px;
-    height: 70px;
-    bottom: 60px;
-    left: 30px;
+    width: 60px;
+    height: 60px;
+    bottom: 100px; /* Ajuste para landscape */
+    left: 25px;
   }
 
   #question-container {
-    top: 50px;
-    padding: 10px 15px;
-    font-size: 1rem;
+    top: 40px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
   }
 }
