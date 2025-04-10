@@ -6,7 +6,6 @@ const errorsEl = document.getElementById("errors");
 const startBtn = document.getElementById("startBtn");
 const restartBtn = document.getElementById("restartBtn");
 
-// Variáveis do jogo com valores iniciais responsivos
 let jogoIniciado = false;
 let erros = 0;
 const maxErros = 3;
@@ -18,26 +17,22 @@ let jumping = false;
 let answeredCorrectly = false;
 let respondeuNaRodada = false;
 
-// Configurações responsivas
 const isMobile = window.innerWidth < 400;
 let velocidadeOpcoes = isMobile ? 1 : 1;
 let gravity = isMobile ? 4 : 8;
 const espacamentoOpcoes = isMobile ? 1000 : 1000;
 
-// Sons do jogo
 const trilhaAudio = new Audio('trilha2.mp3');
 const somPulo = new Audio('pulo2.mp3');
 const somAcerto = new Audio('acerto2.mp3');
 const somErro = new Audio('erro.mp3');
 
-// Configuração de volume
 trilhaAudio.loop = true;
 trilhaAudio.volume = 1.0;
 somPulo.volume = 0.7;
 somAcerto.volume = 1.0;
 somErro.volume = 1.0;
 
-// Sistema de mensagens
 const mensagemFeedback = document.createElement('div');
 Object.assign(mensagemFeedback.style, {
   position: 'fixed',
@@ -54,7 +49,6 @@ Object.assign(mensagemFeedback.style, {
 });
 document.body.appendChild(mensagemFeedback);
 
-// Posicionamento inicial da mensagem
 const startBtnTop = startBtn.getBoundingClientRect().top;
 mensagemFeedback.style.top = `${startBtnTop - 60}px`;
 
@@ -65,7 +59,6 @@ function mostrarMensagem(texto, cor) {
   setTimeout(() => mensagemFeedback.style.display = 'none', 1000);
 }
 
-// Funções do jogo
 function embaralhar(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -77,34 +70,32 @@ function loadQuestion() {
   answeredCorrectly = false;
   respondeuNaRodada = false;
   const q = questions[currentQuestionIndex];
-  
-  // Mostra a pergunta diretamente (sem contagem regressiva)
+
   questionEl.innerText = q.question;
   questionEl.style.backgroundColor = '';
   questionEl.style.color = '';
 
   document.querySelectorAll('.option').forEach(el => el.remove());
 
-  // Cria opções com espaçamento responsivo
   q.options.forEach((opt, i) => {
     const div = document.createElement('div');
     div.className = 'option';
     div.innerText = opt;
     div.style.left = `${window.innerWidth + (i * espacamentoOpcoes)}px`;
-    div.style.top = `${50 + (i % 3) * 10}%`; // Distribuição vertical
+    div.style.top = `${50 + (i % 3) * 10}%`;
     div.dataset.correct = opt === q.answer;
     game.appendChild(div);
   });
 
-  // Atualização de nível
   if (currentQuestionIndex > 0 && currentQuestionIndex % 10 === 0) {
     const nivel = currentQuestionIndex >= 30 ? "Super Difícil" :
-                 currentQuestionIndex >= 20 ? "Difícil" :
-                 currentQuestionIndex >= 10 ? "Médio" : "Fácil";
+                  currentQuestionIndex >= 20 ? "Difícil" :
+                  currentQuestionIndex >= 10 ? "Médio" : "Fácil";
     mostrarMensagem(`⚡ Nível: ${nivel}`, "#3498db");
   }
 }
 
+// CORREÇÃO DA LÓGICA DE PULO
 function jump() {
   if (!jogoIniciado || jumping || pulosRestantes <= 0) return;
 
@@ -112,7 +103,8 @@ function jump() {
   somPulo.play();
   pulosRestantes--;
   jumping = true;
-  
+
+  const posicaoBase = 100; // posição original do personagem
   let jumpHeight = 0;
   const maxJump = isMobile ? 400 : 500;
   const jumpSpeed = isMobile ? 15 : 10;
@@ -120,24 +112,29 @@ function jump() {
   const jumpInterval = setInterval(() => {
     if (jumpHeight >= maxJump) {
       clearInterval(jumpInterval);
+
       const fall = setInterval(() => {
+        jumpHeight -= gravity;
+
         if (jumpHeight <= 0) {
+          jumpHeight = 0;
           clearInterval(fall);
+          player.style.bottom = `${posicaoBase}px`;
           jumping = false;
           pulosRestantes = maxPulos;
         } else {
-          jumpHeight -= gravity;
-          player.style.bottom = `${50 + jumpHeight}px`;
+          player.style.bottom = `${posicaoBase + jumpHeight}px`;
         }
       }, jumpSpeed);
+
     } else {
       jumpHeight += gravity;
-      player.style.bottom = `${50 + jumpHeight}px`;
+      player.style.bottom = `${posicaoBase + jumpHeight}px`;
     }
   }, jumpSpeed);
 }
 
-// Controles
+
 document.addEventListener('keydown', e => e.code === 'Space' && jump());
 player.addEventListener('click', jump);
 
@@ -188,7 +185,7 @@ function handleCorrectAnswer() {
   currentQuestionIndex++;
 
   mostrarMensagem("✅ +100 pontos!", "#2ecc71");
-  
+
   if (currentQuestionIndex < questions.length) {
     setTimeout(loadQuestion, 800);
   } else {
@@ -203,7 +200,7 @@ function handleError() {
   errorsEl.innerText = `Erros: ${erros}/${maxErros}`;
   errorsEl.classList.add('pulse');
   setTimeout(() => errorsEl.classList.remove('pulse'), 500);
-  
+
   mostrarMensagem("❌ Errou!", "#e74c3c");
   currentQuestionIndex++;
 
@@ -228,7 +225,6 @@ function endGame() {
   trilhaAudio.pause();
 }
 
-// Inicialização do jogo
 startBtn.addEventListener('click', () => {
   embaralhar(questions);
   jogoIniciado = true;
@@ -246,7 +242,6 @@ startBtn.addEventListener('click', () => {
 
 restartBtn.addEventListener('click', () => window.location.reload());
 
-// Adaptação ao redimensionamento
 window.addEventListener('resize', () => {
   const nowMobile = window.innerWidth < 600;
   if (nowMobile !== isMobile) {

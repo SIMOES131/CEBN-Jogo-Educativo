@@ -6,17 +6,19 @@ body {
   overflow: hidden;
   background: #222;
   color: #fff;
-  min-height: 100vh;
-  background-image: url('./assets/11.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  
+  
 }
 
 .container {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: relative;
+  background-image: url('./assets/11.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  
 }
 
 h1 {
@@ -39,7 +41,7 @@ h1 {
 /* PERSONAGEM - AJUSTE PRINCIPAL PARA MOBILE */
 #player {
   position: absolute;
-  bottom: 200px; /* Aumentei de 80px para 120px para subir o personagem */
+  bottom: 200px; 
   left: 30px;
   width: 70px;
   height: 70px;
