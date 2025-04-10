@@ -1,4 +1,4 @@
-/* Estilos base (mobile-first) */
+/* style.css - Versão Corrigida */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -36,29 +36,23 @@ h1 {
   overflow: hidden;
 }
 
+/* Personagem corrigido - visível em todas as telas */
 #player {
-  position: relative;
-  margin-bottom: 1px; /* Posição relativa à altura da tela */
-  margin-top: 120px;
-  left: 20px;
-  width: 80px; /* Tamanho reduzido para mobile */
-  height: 70px;
+  position: absolute;
+  bottom: 80px;
+  left: 30px;
+  width: 80px;
+  height: 80px;
   background-color: #fff;
   border-radius: 50%;
   z-index: 10;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  /* Garante que o personagem não ultrapasse os limites */
-  max-width: 25vw; /* Limita o tamanho máximo relativo à largura da tela */
-  max-height: 25vw;
 }
 
-
-
-
-
+/* Container de pergunta ajustado */
 #question-container {
   position: absolute;
-  top: 60px;
+  top: 70px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255, 255, 255, 0.9);
@@ -176,7 +170,9 @@ h1 {
   to { opacity: 1; }
 }
 
-/* Media Queries para tablets */
+/* ========== MEDIA QUERIES ========== */
+
+/* Tablets */
 @media (min-width: 600px) {
   h1 {
     font-size: 2rem;
@@ -184,17 +180,14 @@ h1 {
   }
 
   #player {
-    width: 80px !important;
-    height: 80px !important;
-    bottom: 20%;
-    top: 400px;
+    width: 100px;
+    height: 100px;
+    bottom: 100px;
     left: 50px;
-    margin-top: 250px;
   }
 
-
   #question-container {
-    top: 80px;
+    top: 90px;
     padding: 15px 20px;
     font-size: 1.2rem;
   }
@@ -202,7 +195,6 @@ h1 {
   .option {
     padding: 10px 20px;
     font-size: 1.1rem;
-    top: 100px;
   }
 
   #score, #errors {
@@ -213,20 +205,10 @@ h1 {
   #startBtn, #restartBtn {
     padding: 12px 25px;
     font-size: 1.2rem;
-    margin-top: 130px;
-  }
-
-  #feedback-msg {
-    font-size: 1.3rem;
-  }
-
-  #message {
-    padding: 20px 30px;
-    font-size: 1.5rem;
   }
 }
 
-/* Media Queries para desktops */
+/* Desktops */
 @media (min-width: 900px) {
   h1 {
     font-size: 2.5rem;
@@ -236,13 +218,12 @@ h1 {
   #player {
     width: 120px;
     height: 120px;
-    bottom: 20%;
-    margin-top: 250px;
+    bottom: 120px;
     left: 80px;
   }
 
   #question-container {
-    top: 100px;
+    top: 110px;
     padding: 20px 30px;
     font-size: 1.5rem;
     max-width: 700px;
@@ -252,36 +233,16 @@ h1 {
     padding: 12px 25px;
     font-size: 1.3rem;
   }
-
-  #score, #errors {
-    top: 20px;
-    font-size: 1.3rem;
-    padding: 10px 20px;
-  }
-
-  #startBtn, #restartBtn {
-    padding: 15px 30px;
-    font-size: 1.3rem;
-  }
-
-  #feedback-msg {
-    font-size: 1.5rem;
-  }
-
-  #message {
-    padding: 25px 40px;
-    font-size: 1.8rem;
-  }
 }
 
-/* Ajustes para telas muito largas */
+/* Telas muito grandes */
 @media (min-width: 1200px) {
   #player {
-    left: 150px;
+    left: 120px;
   }
 }
 
-/* Orientação paisagem em dispositivos móveis */
+/* Modo Paisagem (Mobile) */
 @media (max-height: 500px) and (orientation: landscape) {
   #game {
     height: calc(100vh - 40px);
@@ -293,26 +254,15 @@ h1 {
   }
 
   #player {
-    width: 50px;
-    height: 50px;
-    bottom: 10%;
-    left: 15px;
-    margin-top: 2500px;
+    width: 70px;
+    height: 70px;
+    bottom: 60px;
+    left: 30px;
   }
 
-  .option {
-    padding: 10px 20px;
-    font-size: 1.1rem;
-    top: 10px;
-  }
-
-  #score, #errors {
-    font-size: 0.8rem;
-  }
-
-  #startBtn, #restartBtn {
-    padding: 15px 30px;
-    font-size: 1.3rem;
-    margin-top: 130px;
+  #question-container {
+    top: 50px;
+    padding: 10px 15px;
+    font-size: 1rem;
   }
 }
