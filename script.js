@@ -136,7 +136,8 @@ function jump() {
   pulosRestantes--;
   jumping = true;
 
-  const posicaoBase = 230;
+  const isMobile = window.innerWidth <= 768;
+  const posicaoBase = isMobile ? 230 : 150;
   let jumpHeight = 0;
   const maxJump = isMobile ? 400 : 500;
   const jumpSpeed = isMobile ? 15 : 10;
@@ -163,6 +164,7 @@ function jump() {
     }
   }, jumpSpeed);
 }
+
 
 document.addEventListener('keydown', e => e.code === 'Space' && jump());
 player.addEventListener('click', jump);
