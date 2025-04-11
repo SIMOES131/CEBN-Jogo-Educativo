@@ -1,10 +1,10 @@
-import { questionsAtualidades } from "./Questions/questionsAtualidades.js";
-import { questionsCiencias } from "./Questions/questionsCiencias.js";
-import { questionsGeografia } from "./Questions/questionsGeografia.js";
-import { questionsGeral } from "./Questions/questionsgeral.js";
-import { questionsHistoria } from "./Questions/questionsHistoria.js";
-import { questionsMatematica } from "./Questions/qustionsMatematica.js";
-import { questionsPortugues } from "./Questions/questionsPortugues.js";
+import { questionsAtualidades } from "./questionsAtualidades.js";
+import { questionsCiencias } from "./questionsCiencias.js";
+import { questionsGeografia } from "./questionsGeografia.js";
+import { questionsGeral } from "./questionsGeral.js";
+import { questionsHistoria } from "./questionsHistoria.js";
+import { questionsMatematica } from "./qustionsMatematica.js";
+import { questionsPortugues } from "./questionsPortugues.js";
 
 const temas = {
   atualidades: questionsAtualidades,
@@ -294,6 +294,9 @@ startBtn.addEventListener('click', () => {
   loadQuestion();
   gameLoop();
 });
+
+
+
 
 
 
