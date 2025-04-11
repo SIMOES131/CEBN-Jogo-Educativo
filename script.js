@@ -136,7 +136,7 @@ function jump() {
   pulosRestantes--;
   jumping = true;
 
-  const posicaoBase = 200;
+  const posicaoBase = 220;
   let jumpHeight = 0;
   const maxJump = isMobile ? 400 : 500;
   const jumpSpeed = isMobile ? 15 : 10;
