@@ -342,4 +342,7 @@ if (personagem) {
 
 
 
+
+
+
 restartBtn.addEventListener('click', () => window.location.reload());

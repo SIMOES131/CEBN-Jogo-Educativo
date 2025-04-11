@@ -251,7 +251,8 @@ h1 {
 /* TELAS MUITO GRANDES (acima de 1200px) */
 @media (min-width: 1200px) {
   #player {
-    
+    width: 150px;
+    height: 150px;
     left: 120px;
    
   }
