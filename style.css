@@ -54,7 +54,7 @@ h1 {
 /* CONTAINER DE PERGUNTA */
 #question-container {
   position: absolute;
-  top: 60px;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255, 255, 255, 0.9);
@@ -81,13 +81,14 @@ h1 {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   white-space: nowrap;
   transform: translateY(-50%);
+  margin-top: 0px;
 }
 
 /* PLACAR */
 #score, #errors {
   position: absolute;
   top: 10px;
-  font-size: 0.9rem;
+  font-size: 2rem;
   padding: 5px 10px;
   border-radius: 5px;
   font-weight: bold;
@@ -121,7 +122,7 @@ h1 {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 10px 20px;
-  font-size: 1rem;
+  font-size: 2rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -134,6 +135,8 @@ h1 {
 #restartBtn {
   display: none;
 }
+
+
 
 /* MENSAGENS */
 #feedback-msg {
@@ -151,10 +154,57 @@ h1 {
   background: rgba(0, 0, 0, 0.7);
 }
 
+
+#tema-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tema-btn {
+  margin: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.tema-selecionado {
+  background-color: #3498db;
+  color: white;
+  border: 2px solid #1f618d;
+}
+
+
+
 /* ========== MEDIA QUERIES ========== */
 
 /* TABLETS (acima de 600px) */
-@media (min-width: 600px) {
+@media (max-width: 600px) { 
+  #score, #errors, #startBtn, #restartBtn {
+  
+    font-size: 0.9rem;
+    
+  }
+
+  .tema-btn {
+    font-size: 0.5rem;
+    padding: 4px 8px;
+    margin: 0px;
+  }
+
+  #feedback-msg { 
+
+    margin-top: 80%;
+  }
+}
+
+@media (max-width: 768px) {
+
+  #score, #errors, #startBtn, #restartBtn {
+  
+    font-size: 1.5rem;
+    
+  }
+  
   h1 {
     font-size: 2rem;
     padding: 15px 0;
@@ -177,6 +227,8 @@ h1 {
     padding: 10px 20px;
     font-size: 1.1rem;
   }
+
+  
 }
 
 /* DESKTOPS (acima de 900px) */
@@ -210,6 +262,13 @@ h1 {
 
 /* MODO PAISAGEM (CELULAR) */
 @media (max-height: 500px) and (orientation: landscape) {
+
+  #score, #errors, #startBtn, #restartBtn {
+  
+    font-size: 0.9rem;
+    
+  }
+
   #game {
     height: calc(100vh - 40px);
   }
@@ -230,6 +289,12 @@ h1 {
     top: 40px;
     padding: 8px 12px;
     font-size: 0.9rem;
+  }
+
+  .tema-btn {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    border-radius: 4px;
   }
 }
 
