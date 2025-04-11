@@ -296,46 +296,5 @@ startBtn.addEventListener('click', () => {
 });
 
 
-const personagem = document.getElementById('player');
-
-// Verifica se o personagem existe antes de criar o balão
-if (personagem) {
-  const balao = document.createElement('div');
-  balao.innerText = "Olá, eu sou aluno do CEBN e criei esse jogo divertido para que possamos aprender brincando.";
-
-  // Estilização do balão
-  Object.assign(balao.style, {
-    position: 'absolute',
-    backgroundColor: '#fff',
-    color: '#000',
-    padding: '10px',
-    borderRadius: '10px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-    maxWidth: '250px',
-    textAlign: 'center',
-    fontSize: '14px',
-    zIndex: '1000'
-  });
-
-  // Posiciona o balão acima do personagem
-  const personagemRect = personagem.getBoundingClientRect();
-  balao.style.left = `${personagemRect.left + personagemRect.width / 1.1}px`;
-  balao.style.top = `${personagemRect.top - 75}px`;
-  balao.style.transform = 'translateX(-50%)';
-
-  document.body.appendChild(balao);
-
-  // Remove o balão depois de 15 segundos
-  let balaoTimeout = setTimeout(() => {
-    balao.remove();
-  }, 15000);
-
-  // Remove se clicar em iniciar
-  startBtn.addEventListener('click', () => {
-    balao.remove();
-    clearTimeout(balaoTimeout);
-  });
-}
-
 
 restartBtn.addEventListener('click', () => window.location.reload());
