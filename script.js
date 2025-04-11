@@ -136,7 +136,7 @@ function jump() {
   pulosRestantes--;
   jumping = true;
 
-  const posicaoBase = 220;
+  const posicaoBase = 230;
   let jumpHeight = 0;
   const maxJump = isMobile ? 400 : 500;
   const jumpSpeed = isMobile ? 15 : 10;
@@ -236,9 +236,9 @@ function handleError() {
     setTimeout(() => {
       mostrarMensagem("💀 Game Over!", "#c0392b");
       endGame();
-    }, 10000);
+    }, 1000);
   } else if (currentQuestionIndex < questions.length) {
-    setTimeout(loadQuestion, 1500);
+    setTimeout(loadQuestion, 10000);
   } else {
     setTimeout(() => {
       mostrarMensagem("🎉 Fim do jogo!", "#f1c40f");
