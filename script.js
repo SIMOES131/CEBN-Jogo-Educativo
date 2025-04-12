@@ -269,12 +269,19 @@ temaBtns.forEach(btn => {
       return;
     }
 
+    // Remove a classe 'selecionado' de todos os botões
+    temaBtns.forEach(b => b.classList.remove('selecionado'));
+
+    // Adiciona ao botão clicado
+    btn.classList.add('selecionado');
+
     temaSelecionado = tema;
     startBtn.disabled = false;
     startBtn.style.opacity = 1;
-    mostrarMensagem(`Tema "${tema}" selecionado. Clique em Iniciar!`, "#3498db");
+    //mostrarMensagem(`Tema "${tema}" selecionado. Clique em Iniciar!`, "#3498db");
   });
 });
+
 
 startBtn.addEventListener('click', () => {
   if (!temaSelecionado) {
@@ -303,7 +310,7 @@ const personagem = document.getElementById('player');
 // Verifica se o personagem existe antes de criar o balão
 if (personagem) {
   const balao = document.createElement('div');
-  balao.innerText = "Olá, eu sou aluno do CEBN e criei esse jogo divertido para que possamos aprender brincando.";
+  balao.innerText = "Olá, eu sou aluno do CEBN e criei este jogo divertido para que possamos aprender enquanto brincamos.";
 
   // Estilização do balão
   Object.assign(balao.style, {
@@ -338,10 +345,6 @@ if (personagem) {
     clearTimeout(balaoTimeout);
   });
 }
-
-
-
-
 
 
 
