@@ -310,7 +310,7 @@ const personagem = document.getElementById('player');
 // Verifica se o personagem existe antes de criar o balão
 if (personagem) {
   const balao = document.createElement('div');
-  balao.innerText = "Olá, eu sou aluno do CEBN e criei este jogo divertido para que possamos aprender enquanto brincamos.";
+  balao.innerText = "Olá, nós somos alunos do CEBN e criamos este jogo divertido para que possamos aprender enquanto jogamos.";
 
   // Estilização do balão
   Object.assign(balao.style, {
