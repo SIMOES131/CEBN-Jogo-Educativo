@@ -139,7 +139,7 @@ function jump() {
   const isMobile = window.innerWidth <= 768;
   const posicaoBase = isMobile ? 230 : 150;
   let jumpHeight = 0;
-  const maxJump = isMobile ? 400 : 500;
+  const maxJump = isMobile ? 300 : 300;
   const jumpSpeed = isMobile ? 15 : 10;
 
   const jumpInterval = setInterval(() => {
