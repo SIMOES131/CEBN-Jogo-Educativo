@@ -1,7 +1,7 @@
 import { questionsAtualidades } from "./questionsAtualidades.js";
 import { questionsCiencias } from "./questionsCiencias.js";
 import { questionsGeografia } from "./questionsGeografia.js";
-import { questionsGeral } from "./questionsGeral.js";
+import { questionsIngles } from "./questionsIngles.js";
 import { questionsHistoria } from "./questionsHistoria.js";
 import { questionsMatematica } from "./qustionsMatematica.js";
 import { questionsPortugues } from "./questionsPortugues.js";
@@ -9,6 +9,7 @@ import { questionsPortugues } from "./questionsPortugues.js";
 const temas = {
   atualidades: questionsAtualidades,
   ciencias: questionsCiencias,
+  ingles: questionsIngles,
   geografia: questionsGeografia,
   historia: questionsHistoria,
   matematica: questionsMatematica,
@@ -16,6 +17,7 @@ const temas = {
   todos: [
     ...questionsAtualidades,
     ...questionsCiencias,
+    ...questionsIngles,
     ...questionsGeografia,
     ...questionsHistoria,
     ...questionsMatematica,
