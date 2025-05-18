@@ -124,7 +124,7 @@ function loadQuestion() {
       div.dataset.correct = opt === q.answer;
       game.appendChild(div);
     });
-  },5);
+  },7000);
 }
 
 
@@ -240,7 +240,7 @@ function handleError() {
     setTimeout(() => {
       mostrarMensagem("💀 Game Over!", "#c0392b");
       endGame();
-    }, 1000);
+    }, 5000);
   } else if (currentQuestionIndex < questions.length) {
     setTimeout(loadQuestion, 10000);
   } else {
