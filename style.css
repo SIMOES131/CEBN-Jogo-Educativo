@@ -289,6 +289,10 @@ h1 {
     left: 120px;
    
   }
+  .option {
+    padding: 10px 20px;
+    font-size: 2.5rem;
+  }
 }
 
 /* MODO PAISAGEM (CELULAR) */
