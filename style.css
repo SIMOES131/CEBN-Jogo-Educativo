@@ -290,9 +290,12 @@ h1 {
    
   }
   .tema-btn {
-    padding: 10px 20px;
-    font-size: 2.5rem;
-  }
+  font-size: 20px;      /* aumenta o tamanho do texto */
+  padding: 15px 25px;   /* aumenta o tamanho do botão */
+  margin: 10px;         /* espaço entre os botões */
+  border-radius: 8px;   /* cantos arredondados (opcional) */
+  
+}
 }
 
 /* MODO PAISAGEM (CELULAR) */
