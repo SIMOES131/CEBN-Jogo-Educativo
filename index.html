@@ -1,50 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jogo de Perguntas</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Permanent+Marker&display=swap" rel="stylesheet">
-<body>
-  <div class="container">
-    <h1>CENTRO EDUCACIONAL DE BARRA NOVA</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jogo de Perguntas</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Permanent+Marker&display=swap"
+    rel="stylesheet"
+  />
+  <body>
+    <div class="container">
+      <h1>Centro Educacional de Barra Nova</h1>
 
-    <div id="tema-container">
-      
-      <button class="tema-btn" data-tema="portugues">Português</button>
-      <button class="tema-btn" data-tema="matematica">Matemática</button>
-      <button class="tema-btn" data-tema="historia">História</button>
-      <button class="tema-btn" data-tema="geografia">Geografia</button>
-      <button class="tema-btn" data-tema="ciencias">Ciências</button>
-      <button class="tema-btn" data-tema="ingles">Inglês</button>
-      <button class="tema-btn" data-tema="atualidades">Atualidades</button>
-      <button class="tema-btn" data-tema="todos">Todas as áreas</button>
-    </div>    
+      <div id="tema-container">
+        <button class="tema-btn" data-tema="portugues">Português</button>
+        <button class="tema-btn" data-tema="matematica">Matemática</button>
+        <button class="tema-btn" data-tema="historia">História</button>
+        <button class="tema-btn" data-tema="geografia">Geografia</button>
+        <button class="tema-btn" data-tema="ciencias">Ciências</button>
+        <button class="tema-btn" data-tema="ingles">Inglês</button>
+        <button class="tema-btn" data-tema="atualidades">Atualidades</button>
+        <button class="tema-btn" data-tema="todos">Todas as áreas</button>
+      </div>
 
-<div id="game">
-<!--<div id="player"></div>-->
-<img id="player" src="./assets/menina-menino.png" alt="Personagem">
-  <div id="question-container">
-    <div id="question"></div>
-  </div>
-  <div id="score">Pontos: 0</div>
-  <div id="errors">Erros: 0</div>
-  <div id="feedback-msg"></div>
-</div>
+      <div id="game">
+        <!--<div id="player"></div>-->
+        <img id="player" src="./assets/menina-menino.png" alt="Personagem" />
+        <div id="question-container">
+          <div id="question"></div>
+        </div>
+        <div id="score">Pontos: 0</div>
+        <div id="errors">Erros: 0</div>
+        <div id="feedback-msg"></div>
+      </div>
 
-<button id="startBtn">Iniciar</button>
-<button id="restartBtn">Reiniciar</button>
-<div id="message" class="hidden"></div>
-  </div>
+      <button id="startBtn">Iniciar</button>
+      <button id="restartBtn">Reiniciar</button>
+      <div id="message" class="hidden"></div>
+    </div>
 
-  <script src="questions.js"></script>
-  <script type="module" src="script.js"></script>
-</body>
-
-
-
+    <script src="questions.js"></script>
+    <script type="module" src="script.js"></script>
+  </body>
 </html>

@@ -21,18 +21,18 @@ const temas = {
     ...questionsGeografia,
     ...questionsHistoria,
     ...questionsMatematica,
-    ...questionsPortugues
-  ]
+    ...questionsPortugues,
+  ],
 };
 
-const temaBtns = document.querySelectorAll('.tema-btn');
-const startBtn = document.getElementById('startBtn');
-const restartBtn = document.getElementById('restartBtn');
-const questionEl = document.getElementById('question');
-const game = document.getElementById('game');
-const player = document.getElementById('player');
-const scoreEl = document.getElementById('score');
-const errorsEl = document.getElementById('errors');
+const temaBtns = document.querySelectorAll(".tema-btn");
+const startBtn = document.getElementById("startBtn");
+const restartBtn = document.getElementById("restartBtn");
+const questionEl = document.getElementById("question");
+const game = document.getElementById("game");
+const player = document.getElementById("player");
+const scoreEl = document.getElementById("score");
+const errorsEl = document.getElementById("errors");
 
 let questions = [];
 let jogoIniciado = false;
@@ -52,10 +52,10 @@ let velocidadeOpcoes = isMobile ? 1 : 2;
 let gravity = isMobile ? 5 : 15;
 const espacamentoOpcoes = isMobile ? 800 : 800;
 
-const trilhaAudio = new Audio('trilha2.mp3');
-const somPulo = new Audio('pulo2.mp3');
-const somAcerto = new Audio('acerto2.mp3');
-const somErro = new Audio('erro.mp3');
+const trilhaAudio = new Audio("trilha2.mp3");
+const somPulo = new Audio("pulo2.mp3");
+const somAcerto = new Audio("acerto2.mp3");
+const somErro = new Audio("erro.mp3");
 
 trilhaAudio.loop = true;
 trilhaAudio.volume = 1.0;
@@ -64,20 +64,20 @@ somAcerto.volume = 1.0;
 somErro.volume = 1.0;
 
 // Mensagem no topo
-const mensagemFeedback = document.createElement('div');
+const mensagemFeedback = document.createElement("div");
 Object.assign(mensagemFeedback.style, {
-  position: 'fixed',
-  left: '50%',
-  transform: 'translateX(-50%)',
-  padding: '10px 20px',
-  fontSize: isMobile ? '18px' : '24px',
-  color: '#fff',
-  borderRadius: '10px',
-  display: 'none',
-  zIndex: '9999',
-  textAlign: 'center',
-  backgroundColor: 'rgba(0,0,0,0.7)',
-  top: '20px'
+  position: "fixed",
+  left: "50%",
+  transform: "translateX(-50%)",
+  padding: "10px 20px",
+  fontSize: isMobile ? "18px" : "24px",
+  color: "#fff",
+  borderRadius: "10px",
+  display: "none",
+  zIndex: "9999",
+  textAlign: "center",
+  backgroundColor: "rgba(0,0,0,0.7)",
+  top: "20px",
 });
 document.body.appendChild(mensagemFeedback);
 
@@ -85,16 +85,14 @@ function mostrarMensagem(texto, cor) {
   mensagemFeedback.innerText = texto;
   mensagemFeedback.style.backgroundColor = cor;
 
-// Centralizar vertical e horizontal
-mensagemFeedback.style.top = '50%';
-mensagemFeedback.style.left = '50%';
-mensagemFeedback.style.transform = 'translate(-50%, -50%)';
+  // Centralizar vertical e horizontal
+  mensagemFeedback.style.top = "50%";
+  mensagemFeedback.style.left = "50%";
+  mensagemFeedback.style.transform = "translate(-50%, -50%)";
 
+  mensagemFeedback.style.display = "block";
 
-
-  mensagemFeedback.style.display = 'block';
-
-  setTimeout(() => mensagemFeedback.style.display = 'none', 3000);
+  setTimeout(() => (mensagemFeedback.style.display = "none"), 3000);
 }
 
 function embaralhar(array) {
@@ -112,21 +110,24 @@ function loadQuestion() {
   if (!q) return;
 
   questionEl.innerText = q.question;
-  document.querySelectorAll('.option').forEach(el => el.remove());
+  document.querySelectorAll(".option").forEach((el) => el.remove());
 
   setTimeout(() => {
     q.options.forEach((opt, i) => {
-      const div = document.createElement('div');
-      div.className = 'option';
+      const div = document.createElement("div");
+      div.className = "option";
       div.innerText = opt;
-      div.style.left = `${window.innerWidth + (i * espacamentoOpcoes)}px`;
-      div.style.top = `${30 + (i % 3) * 10}%`;
+      div.style.left = `${window.innerWidth + i * espacamentoOpcoes}px`;
+
+      // Agora teremos: 40%, 50% e 50% (a mais alta repetida)
+      const heights = [30, 40, 30, 40]; // Alturas em porcentagem
+      div.style.top = `${heights[i % heights.length]}%`;
+
       div.dataset.correct = opt === q.answer;
       game.appendChild(div);
     });
-  },7000);
+  }, 7000);
 }
-
 
 // Pulo do personagem
 
@@ -167,9 +168,8 @@ function jump() {
   }, jumpSpeed);
 }
 
-
-document.addEventListener('keydown', e => e.code === 'Space' && jump());
-player.addEventListener('click', jump);
+document.addEventListener("keydown", (e) => e.code === "Space" && jump());
+player.addEventListener("click", jump);
 
 function checkCollision(option) {
   const playerRect = player.getBoundingClientRect();
@@ -188,14 +188,18 @@ function gameLoop() {
     return;
   }
 
-  document.querySelectorAll('.option').forEach(opt => {
+  document.querySelectorAll(".option").forEach((opt) => {
     let left = parseInt(opt.style.left);
     left -= velocidadeOpcoes;
     opt.style.left = `${left}px`;
 
     if (left < -100) {
       opt.remove();
-      if (opt.dataset.correct === "true" && !answeredCorrectly && !respondeuNaRodada) {
+      if (
+        opt.dataset.correct === "true" &&
+        !answeredCorrectly &&
+        !respondeuNaRodada
+      ) {
         handleError();
       }
     }
@@ -203,7 +207,7 @@ function gameLoop() {
     if (!respondeuNaRodada && checkCollision(opt)) {
       respondeuNaRodada = true;
       opt.dataset.correct === "true" ? handleCorrectAnswer() : handleError();
-      document.querySelectorAll('.option').forEach(el => el.remove());
+      document.querySelectorAll(".option").forEach((el) => el.remove());
     }
   });
 
@@ -230,8 +234,8 @@ function handleError() {
   somErro.play();
   erros++;
   errorsEl.innerText = `Erros: ${erros}/${maxErros}`;
-  errorsEl.classList.add('pulse');
-  setTimeout(() => errorsEl.classList.remove('pulse'), 500);
+  errorsEl.classList.add("pulse");
+  setTimeout(() => errorsEl.classList.remove("pulse"), 500);
 
   mostrarMensagem("❌ Errou!", "#e74c3c");
   currentQuestionIndex++;
@@ -253,7 +257,7 @@ function handleError() {
 
 function endGame() {
   jogoIniciado = false;
-  restartBtn.style.display = 'block';
+  restartBtn.style.display = "block";
   trilhaAudio.pause();
 }
 
@@ -263,19 +267,19 @@ startBtn.style.opacity = 0.5;
 
 let temaSelecionado = null;
 
-temaBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
+temaBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
     const tema = btn.dataset.tema;
     if (!temas[tema]) {
-      alert('Tema não encontrado.');
+      alert("Tema não encontrado.");
       return;
     }
 
     // Remove a classe 'selecionado' de todos os botões
-    temaBtns.forEach(b => b.classList.remove('selecionado'));
+    temaBtns.forEach((b) => b.classList.remove("selecionado"));
 
     // Adiciona ao botão clicado
-    btn.classList.add('selecionado');
+    btn.classList.add("selecionado");
 
     temaSelecionado = tema;
     startBtn.disabled = false;
@@ -284,10 +288,9 @@ temaBtns.forEach(btn => {
   });
 });
 
-
-startBtn.addEventListener('click', () => {
+startBtn.addEventListener("click", () => {
   if (!temaSelecionado) {
-    alert('Escolha um tema primeiro!');
+    alert("Escolha um tema primeiro!");
     return;
   }
 
@@ -300,39 +303,39 @@ startBtn.addEventListener('click', () => {
   scoreEl.innerText = "Pontos: 0";
   errorsEl.innerText = `Erros: 0/${maxErros}`;
   trilhaAudio.play();
-  startBtn.style.display = 'none';
-  restartBtn.style.display = 'none';
+  startBtn.style.display = "none";
+  restartBtn.style.display = "none";
   loadQuestion();
   gameLoop();
 });
 
-
-const personagem = document.getElementById('player');
+const personagem = document.getElementById("player");
 
 // Verifica se o personagem existe antes de criar o balão
 if (personagem) {
-  const balao = document.createElement('div');
-  balao.innerText = "Olá, nós somos alunos do CEBN e criamos este jogo divertido para que possamos aprender enquanto jogamos.";
+  const balao = document.createElement("div");
+  balao.innerText =
+    "Olá, nós somos alunos do CEBN e criamos este jogo divertido para que possamos aprender enquanto jogamos.";
 
   // Estilização do balão
   Object.assign(balao.style, {
-    position: 'absolute',
-    backgroundColor: '#fff',
-    color: '#000',
-    padding: '10px',
-    borderRadius: '10px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-    maxWidth: '250px',
-    textAlign: 'center',
-    fontSize: '14px',
-    zIndex: '1000'
+    position: "absolute",
+    backgroundColor: "#fff",
+    color: "#000",
+    padding: "10px",
+    borderRadius: "10px",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+    maxWidth: "250px",
+    textAlign: "center",
+    fontSize: "14px",
+    zIndex: "1000",
   });
 
   // Posiciona o balão acima do personagem
   const personagemRect = personagem.getBoundingClientRect();
   balao.style.left = `${personagemRect.left + personagemRect.width / 1}px`;
   balao.style.top = `${personagemRect.top - 95}px`;
-  balao.style.transform = 'translateX(-50%)';
+  balao.style.transform = "translateX(-50%)";
 
   document.body.appendChild(balao);
 
@@ -342,12 +345,10 @@ if (personagem) {
   }, 15000);
 
   // Remove se clicar em iniciar
-  startBtn.addEventListener('click', () => {
+  startBtn.addEventListener("click", () => {
     balao.remove();
     clearTimeout(balaoTimeout);
   });
 }
 
-
-
-restartBtn.addEventListener('click', () => window.location.reload());
+restartBtn.addEventListener("click", () => window.location.reload());

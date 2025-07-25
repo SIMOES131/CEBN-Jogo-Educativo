@@ -303,7 +303,7 @@ h1 {
   }
 }
 
-@media (min-width: 601px) and (max-width: 899px) {
+/*@media (min-width: 601px) and (max-width: 899px) {
   h1 {
     font-size: 2.2rem;
     padding: 20px 0;
