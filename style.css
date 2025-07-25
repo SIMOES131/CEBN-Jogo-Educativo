@@ -282,6 +282,15 @@ h1 {
   }
 }
 
+@media (max-width: 7680px) {
+  #player {
+    width: 150px;
+    height: 150px;
+    left: 120px;
+   
+  }
+}
+
 /* MODO PAISAGEM (CELULAR) */
 @media (max-height: 500px) and (orientation: landscape) {
 
