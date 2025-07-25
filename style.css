@@ -21,6 +21,21 @@ body {
   
 }
 
+.title {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center;     /* Centraliza verticalmente dentro do flex */
+  text-align: center;
+  
+}
+
+.title img {
+  width: 100px;  /* tamanho do escudo */
+  height: auto;
+  margin-right: 20px;
+}
+
+
 h1 {
   font-family: "Permanent Marker", cursive;
   text-align: center;
@@ -216,6 +231,8 @@ h1 {
     font-size: 2rem;
     padding: 15px 0;
   }
+
+  img 
 
   #player {
     width: 90px;
