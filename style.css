@@ -33,6 +33,8 @@ body {
   width: 100px;  /* tamanho do escudo */
   height: auto;
   margin-right: 20px;
+  margin-top: 10px; /* margem superior para espaçamento */
+  margin-bottom: 10px;
 }
 
 
