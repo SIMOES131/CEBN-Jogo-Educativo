@@ -319,7 +319,7 @@ h1 {
   }
 
   #player {
-    left: 0; 
+    left: 0 !important;
     width: 60px;
     height: 60px;
     /*bottom: 200px;  Ajuste para landscape */
