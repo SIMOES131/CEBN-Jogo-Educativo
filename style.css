@@ -252,7 +252,7 @@ h1 {
   #player {
     width: 90px;
     height: 90px;
-    bottom: 200px;
+    bottom: 60px;
     left: 50px;
   }
 
@@ -343,15 +343,5 @@ h1 {
 
   .seletores-topo {
     top: 50px;
-  }
-}
-
-/* CORREÇÃO ESPECÍFICA SAMSUNG A14 */
-@media (max-width: 412px) and (min-height: 800px) {
-  #player {
-    bottom: 50px;
-    left: 30px;
-    width: 70px; /* Força 70px */
-    height: 70px; /* Força 70px */
   }
 }
