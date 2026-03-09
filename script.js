@@ -3,29 +3,70 @@ import { questionsCiencias } from "./questionsCiencias.js";
 import { questionsGeografia } from "./questionsGeografia.js";
 import { questionsIngles } from "./questionsIngles.js";
 import { questionsHistoria } from "./questionsHistoria.js";
-import { questionsMatematica } from "./qustionsMatematica.js";
+import { questionsMatematica } from "./questionsMatematica.js";
 import { questionsPortugues } from "./questionsPortugues.js";
 
+// Temas com questões organizadas por ano
 const temas = {
-  atualidades: questionsAtualidades,
+  portugues: questionsPortugues,
+  matematica: questionsMatematica,
+  historia: questionsHistoria,
+  geografia: questionsGeografia,
   ciencias: questionsCiencias,
   ingles: questionsIngles,
-  geografia: questionsGeografia,
-  historia: questionsHistoria,
-  matematica: questionsMatematica,
-  portugues: questionsPortugues,
-  todos: [
-    ...questionsAtualidades,
-    ...questionsCiencias,
-    ...questionsIngles,
-    ...questionsGeografia,
-    ...questionsHistoria,
-    ...questionsMatematica,
-    ...questionsPortugues,
-  ],
+  atualidades: questionsAtualidades,
+  todos: {
+    ano6: [
+      ...(questionsPortugues.ano6 || []),
+      ...(questionsMatematica.ano6 || []),
+      ...(questionsHistoria.ano6 || []),
+      ...(questionsGeografia.ano6 || []),
+      ...(questionsCiencias.ano6 || []),
+      ...(questionsIngles.ano6 || []),
+      ...(questionsAtualidades.ano6 || []),
+    ],
+    ano7: [
+      ...(questionsPortugues.ano7 || []),
+      ...(questionsMatematica.ano7 || []),
+      ...(questionsHistoria.ano7 || []),
+      ...(questionsGeografia.ano7 || []),
+      ...(questionsCiencias.ano7 || []),
+      ...(questionsIngles.ano7 || []),
+      ...(questionsAtualidades.ano7 || []),
+    ],
+    ano8: [
+      ...(questionsPortugues.ano8 || []),
+      ...(questionsMatematica.ano8 || []),
+      ...(questionsHistoria.ano8 || []),
+      ...(questionsGeografia.ano8 || []),
+      ...(questionsCiencias.ano8 || []),
+      ...(questionsIngles.ano8 || []),
+      ...(questionsAtualidades.ano8 || []),
+    ],
+    ano9: [
+      ...(questionsPortugues.ano9 || []),
+      ...(questionsMatematica.ano9 || []),
+      ...(questionsHistoria.ano9 || []),
+      ...(questionsGeografia.ano9 || []),
+      ...(questionsCiencias.ano9 || []),
+      ...(questionsIngles.ano9 || []),
+      ...(questionsAtualidades.ano9 || []),
+    ],
+    geral: [
+      ...(questionsPortugues.geral || []),
+      ...(questionsMatematica.geral || []),
+      ...(questionsHistoria.geral || []),
+      ...(questionsGeografia.geral || []),
+      ...(questionsCiencias.geral || []),
+      ...(questionsIngles.geral || []),
+      ...(questionsAtualidades.geral || []),
+    ],
+  },
 };
 
-const temaBtns = document.querySelectorAll(".tema-btn");
+// Elementos DOM
+const anoSelect = document.getElementById("ano-select");
+const temaSelect = document.getElementById("tema-select");
 const startBtn = document.getElementById("startBtn");
 const restartBtn = document.getElementById("restartBtn");
 const questionEl = document.getElementById("question");
@@ -43,14 +84,21 @@ let answeredCorrectly = false;
 let respondeuNaRodada = false;
 let pulosRestantes = 3;
 let jumping = false;
+let timeoutId = null;
 
 const maxErros = 3;
 const maxPulos = 3;
 
-const isMobile = window.innerWidth < 400;
-let velocidadeOpcoes = isMobile ? 1 : 2;
-let gravity = isMobile ? 5 : 15;
-const espacamentoOpcoes = isMobile ? 800 : 800;
+// Velocidade IGUAL para todas as telas
+const velocidadeOpcoes = 1;
+let gravity = 5;
+const espacamentoOpcoes = 800;
+
+// Tempo para as respostas aparecerem (12 segundos para cada pergunta)
+const tempoPrimeiraResposta = 12000; // 12 segundos para cada resposta aparecer
+
+// Posição base do jogador
+const posicaoBase = window.innerWidth <= 768 ? 230 : 150;
 
 const trilhaAudio = new Audio("trilha2.mp3");
 const somPulo = new Audio("pulo2.mp3");
@@ -63,14 +111,14 @@ somPulo.volume = 0.7;
 somAcerto.volume = 1.0;
 somErro.volume = 1.0;
 
-// Mensagem no topo
+// Mensagem de feedback
 const mensagemFeedback = document.createElement("div");
 Object.assign(mensagemFeedback.style, {
   position: "fixed",
   left: "50%",
   transform: "translateX(-50%)",
   padding: "10px 20px",
-  fontSize: isMobile ? "18px" : "24px",
+  fontSize: window.innerWidth <= 400 ? "18px" : "24px",
   color: "#fff",
   borderRadius: "10px",
   display: "none",
@@ -84,14 +132,10 @@ document.body.appendChild(mensagemFeedback);
 function mostrarMensagem(texto, cor) {
   mensagemFeedback.innerText = texto;
   mensagemFeedback.style.backgroundColor = cor;
-
-  // Centralizar vertical e horizontal
   mensagemFeedback.style.top = "50%";
   mensagemFeedback.style.left = "50%";
   mensagemFeedback.style.transform = "translate(-50%, -50%)";
-
   mensagemFeedback.style.display = "block";
-
   setTimeout(() => (mensagemFeedback.style.display = "none"), 3000);
 }
 
@@ -100,9 +144,15 @@ function embaralhar(array) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
+  return array;
 }
 
 function loadQuestion() {
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+    timeoutId = null;
+  }
+
   answeredCorrectly = false;
   respondeuNaRodada = false;
 
@@ -112,24 +162,34 @@ function loadQuestion() {
   questionEl.innerText = q.question;
   document.querySelectorAll(".option").forEach((el) => el.remove());
 
-  setTimeout(() => {
-    q.options.forEach((opt, i) => {
-      const div = document.createElement("div");
-      div.className = "option";
-      div.innerText = opt;
-      div.style.left = `${window.innerWidth + i * espacamentoOpcoes}px`;
+  timeoutId = setTimeout(() => {
+    if (jogoIniciado && currentQuestionIndex < questions.length) {
+      if (questions[currentQuestionIndex] === q) {
+        // Embaralha as opções
+        const opcoesEmbaralhadas = [...q.options];
+        for (let i = opcoesEmbaralhadas.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [opcoesEmbaralhadas[i], opcoesEmbaralhadas[j]] = [
+            opcoesEmbaralhadas[j],
+            opcoesEmbaralhadas[i],
+          ];
+        }
 
-      // Agora teremos: 40%, 50% e 50% (a mais alta repetida)
-      const heights = [30, 40, 30, 40]; // Alturas em porcentagem
-      div.style.top = `${heights[i % heights.length]}%`;
-
-      div.dataset.correct = opt === q.answer;
-      game.appendChild(div);
-    });
-  }, 7000);
+        opcoesEmbaralhadas.forEach((opt, i) => {
+          const div = document.createElement("div");
+          div.className = "option";
+          div.innerText = opt;
+          div.style.left = `${window.innerWidth + i * espacamentoOpcoes}px`;
+          const heights = [30, 40, 30, 40];
+          div.style.top = `${heights[i % heights.length]}%`;
+          div.dataset.correct = opt === q.answer;
+          game.appendChild(div);
+        });
+      }
+    }
+    timeoutId = null;
+  }, tempoPrimeiraResposta);
 }
-
-// Pulo do personagem
 
 function jump() {
   if (!jogoIniciado || jumping || pulosRestantes <= 0) return;
@@ -142,7 +202,7 @@ function jump() {
   const isMobile = window.innerWidth <= 768;
   const posicaoBase = isMobile ? 230 : 150;
   let jumpHeight = 0;
-  const maxJump = isMobile ? 300 : 300;
+  const maxJump = 300;
   const jumpSpeed = isMobile ? 15 : 10;
 
   const jumpInterval = setInterval(() => {
@@ -182,77 +242,101 @@ function checkCollision(option) {
   );
 }
 
+// GAMELOOP SIMPLES
 function gameLoop() {
   if (!jogoIniciado) {
     requestAnimationFrame(gameLoop);
     return;
   }
 
-  document.querySelectorAll(".option").forEach((opt) => {
+  const opcoes = document.querySelectorAll(".option");
+
+  opcoes.forEach((opt) => {
     let left = parseInt(opt.style.left);
     left -= velocidadeOpcoes;
     opt.style.left = `${left}px`;
 
-    if (left < -100) {
-      opt.remove();
-      if (
-        opt.dataset.correct === "true" &&
-        !answeredCorrectly &&
-        !respondeuNaRodada
-      ) {
-        handleError();
-      }
-    }
-
+    // Verifica colisão
     if (!respondeuNaRodada && checkCollision(opt)) {
       respondeuNaRodada = true;
-      opt.dataset.correct === "true" ? handleCorrectAnswer() : handleError();
+
+      if (opt.dataset.correct === "true") {
+        // Acertou
+        somAcerto.play();
+        score += 1;
+        scoreEl.innerText = `Pontos: ${score}`;
+        answeredCorrectly = true;
+        mostrarMensagem("✅ +1 pontos!", "#2ecc71");
+      } else {
+        // Errou
+        somErro.play();
+        erros++;
+        errorsEl.innerText = `Erros: ${erros}/${maxErros}`;
+        errorsEl.classList.add("pulse");
+        setTimeout(() => errorsEl.classList.remove("pulse"), 500);
+        mostrarMensagem("❌ Errou!", "#e74c3c");
+      }
+
+      // Remove todas as opções e avança
       document.querySelectorAll(".option").forEach((el) => el.remove());
+      currentQuestionIndex++;
+
+      if (erros >= maxErros) {
+        setTimeout(() => {
+          mostrarMensagem("💀 Game Over!", "#c0392b");
+          endGame();
+        }, 5000);
+      } else if (currentQuestionIndex < questions.length) {
+        setTimeout(loadQuestion, 2000);
+      } else {
+        setTimeout(() => {
+          mostrarMensagem("🎉 Fim do jogo!", "#f1c40f");
+          endGame();
+        }, 1500);
+      }
+      return;
+    }
+
+    // Se passou da tela sem ser pega
+    if (left < -100) {
+      if (
+        opt.dataset.correct === "true" &&
+        !respondeuNaRodada &&
+        !answeredCorrectly
+      ) {
+        opt.remove();
+
+        // Conta como erro
+        somErro.play();
+        erros++;
+        errorsEl.innerText = `Erros: ${erros}/${maxErros}`;
+        errorsEl.classList.add("pulse");
+        setTimeout(() => errorsEl.classList.remove("pulse"), 500);
+        mostrarMensagem("❌ Errou!", "#e74c3c");
+
+        respondeuNaRodada = true;
+        currentQuestionIndex++;
+
+        if (erros >= maxErros) {
+          setTimeout(() => {
+            mostrarMensagem("💀 Game Over!", "#c0392b");
+            endGame();
+          }, 5000);
+        } else if (currentQuestionIndex < questions.length) {
+          setTimeout(loadQuestion, 2000);
+        } else {
+          setTimeout(() => {
+            mostrarMensagem("🎉 Fim do jogo!", "#f1c40f");
+            endGame();
+          }, 1500);
+        }
+      } else {
+        opt.remove();
+      }
     }
   });
 
   requestAnimationFrame(gameLoop);
-}
-
-function handleCorrectAnswer() {
-  somAcerto.play();
-  score += 100;
-  scoreEl.innerText = `Pontos: ${score}`;
-  answeredCorrectly = true;
-  currentQuestionIndex++;
-  mostrarMensagem("✅ +100 pontos!", "#2ecc71");
-
-  if (currentQuestionIndex < questions.length) {
-    setTimeout(loadQuestion, 800);
-  } else {
-    mostrarMensagem("🎉 Você completou todas as perguntas!", "#f1c40f");
-    setTimeout(endGame, 3000);
-  }
-}
-
-function handleError() {
-  somErro.play();
-  erros++;
-  errorsEl.innerText = `Erros: ${erros}/${maxErros}`;
-  errorsEl.classList.add("pulse");
-  setTimeout(() => errorsEl.classList.remove("pulse"), 500);
-
-  mostrarMensagem("❌ Errou!", "#e74c3c");
-  currentQuestionIndex++;
-
-  if (erros >= maxErros) {
-    setTimeout(() => {
-      mostrarMensagem("💀 Game Over!", "#c0392b");
-      endGame();
-    }, 5000);
-  } else if (currentQuestionIndex < questions.length) {
-    setTimeout(loadQuestion, 10000);
-  } else {
-    setTimeout(() => {
-      mostrarMensagem("🎉 Fim do jogo!", "#f1c40f");
-      endGame();
-    }, 1500);
-  }
 }
 
 function endGame() {
@@ -261,63 +345,90 @@ function endGame() {
   trilhaAudio.pause();
 }
 
-// Estado: botão de iniciar desabilitado até escolher tema
-startBtn.disabled = true;
-startBtn.style.opacity = 0.5;
+// Eventos dos seletores
+anoSelect.addEventListener("change", () => {
+  if (anoSelect.value) {
+    temaSelect.disabled = false;
+    temaSelect.value = "";
+    startBtn.disabled = true;
+    startBtn.style.opacity = 0.5;
+    mostrarMensagem(
+      `Ano ${anoSelect.options[anoSelect.selectedIndex].text} selecionado!`,
+      "#3498db",
+    );
+  } else {
+    temaSelect.disabled = true;
+    temaSelect.value = "";
+    startBtn.disabled = true;
+    startBtn.style.opacity = 0.5;
+  }
+});
 
-let temaSelecionado = null;
-
-temaBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const tema = btn.dataset.tema;
-    if (!temas[tema]) {
-      alert("Tema não encontrado.");
-      return;
-    }
-
-    // Remove a classe 'selecionado' de todos os botões
-    temaBtns.forEach((b) => b.classList.remove("selecionado"));
-
-    // Adiciona ao botão clicado
-    btn.classList.add("selecionado");
-
-    temaSelecionado = tema;
+temaSelect.addEventListener("change", () => {
+  if (temaSelect.value && anoSelect.value) {
     startBtn.disabled = false;
     startBtn.style.opacity = 1;
-    //mostrarMensagem(`Tema "${tema}" selecionado. Clique em Iniciar!`, "#3498db");
-  });
+    mostrarMensagem(
+      `${temaSelect.options[temaSelect.selectedIndex].text} selecionado!`,
+      "#3498db",
+    );
+  } else {
+    startBtn.disabled = true;
+    startBtn.style.opacity = 0.5;
+  }
 });
 
 startBtn.addEventListener("click", () => {
-  if (!temaSelecionado) {
-    alert("Escolha um tema primeiro!");
+  if (!anoSelect.value || !temaSelect.value) {
+    mostrarMensagem("Escolha o ano e a disciplina!", "#e67e22");
     return;
   }
 
-  questions = temas[temaSelecionado];
-  embaralhar(questions);
+  const ano = anoSelect.value;
+  const tema = temaSelect.value;
+
+  if (tema === "todos") {
+    questions = temas.todos[ano] || [];
+  } else {
+    questions = temas[tema][ano] || [];
+  }
+
+  if (questions.length === 0) {
+    mostrarMensagem("Não há questões disponíveis!", "#e67e22");
+    return;
+  }
+
+  // Embaralha as perguntas
+  questions = embaralhar(questions);
+
   jogoIniciado = true;
-  score = 0;
   erros = 0;
+  score = 0;
   currentQuestionIndex = 0;
+  answeredCorrectly = false;
+  respondeuNaRodada = false;
+
   scoreEl.innerText = "Pontos: 0";
   errorsEl.innerText = `Erros: 0/${maxErros}`;
+
   trilhaAudio.play();
   startBtn.style.display = "none";
   restartBtn.style.display = "none";
+
+  const posicaoBase = window.innerWidth <= 768 ? 230 : 150;
+  player.style.bottom = `${posicaoBase}px`;
+
   loadQuestion();
   gameLoop();
 });
 
-const personagem = document.getElementById("player");
-
-// Verifica se o personagem existe antes de criar o balão
-if (personagem) {
+// Balão de boas-vindas
+/*
+if (player) {
   const balao = document.createElement("div");
   balao.innerText =
     "Olá, nós somos alunos do CEBN e criamos este jogo divertido para que possamos aprender enquanto jogamos.";
 
-  // Estilização do balão
   Object.assign(balao.style, {
     position: "absolute",
     backgroundColor: "#fff",
@@ -331,24 +442,25 @@ if (personagem) {
     zIndex: "1000",
   });
 
-  // Posiciona o balão acima do personagem
-  const personagemRect = personagem.getBoundingClientRect();
-  balao.style.left = `${personagemRect.left + personagemRect.width / 1}px`;
-  balao.style.top = `${personagemRect.top - 95}px`;
-  balao.style.transform = "translateX(-50%)";
+  setTimeout(() => {
+    const playerRect = player.getBoundingClientRect();
+    balao.style.left = `${playerRect.left + playerRect.width / 2}px`;
+    balao.style.top = `${playerRect.top - 70}px`;
+    balao.style.transform = "translateX(-50%)";
+  }, 100);
 
   document.body.appendChild(balao);
 
-  // Remove o balão depois de 15 segundos
   let balaoTimeout = setTimeout(() => {
     balao.remove();
   }, 15000);
 
-  // Remove se clicar em iniciar
   startBtn.addEventListener("click", () => {
     balao.remove();
     clearTimeout(balaoTimeout);
   });
-}
+} */
 
 restartBtn.addEventListener("click", () => window.location.reload());
+
+requestAnimationFrame(gameLoop);

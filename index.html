@@ -1,17 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jogo de Perguntas</title>
+    <title>Jogo de Perguntas - CEBN</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Permanent+Marker&display=swap"
-    rel="stylesheet"
-  />
   <body>
     <div class="container">
       <div class="title">
@@ -22,19 +22,31 @@
         <h1>Quiz CEBN</h1>
       </div>
 
-      <div id="tema-container">
-        <button class="tema-btn" data-tema="portugues">Português</button>
-        <button class="tema-btn" data-tema="matematica">Matemática</button>
-        <button class="tema-btn" data-tema="historia">História</button>
-        <button class="tema-btn" data-tema="geografia">Geografia</button>
-        <button class="tema-btn" data-tema="ciencias">Ciências</button>
-        <button class="tema-btn" data-tema="ingles">Inglês</button>
-        <button class="tema-btn" data-tema="atualidades">Atualidades</button>
-        <button class="tema-btn" data-tema="todos">Todas as áreas</button>
+      <!-- Seletores compactos no topo -->
+      <div class="seletores-topo">
+        <select id="ano-select" class="seletor">
+          <option value="">Ano</option>
+          <option value="ano6">6º Ano</option>
+          <option value="ano7">7º Ano</option>
+          <option value="ano8">8º Ano</option>
+          <option value="ano9">9º Ano</option>
+          <option value="geral">Geral</option>
+        </select>
+
+        <select id="tema-select" class="seletor" disabled>
+          <option value="">Disciplina</option>
+          <option value="portugues">Português</option>
+          <option value="matematica">Matemática</option>
+          <option value="historia">História</option>
+          <option value="geografia">Geografia</option>
+          <option value="ciencias">Ciências</option>
+          <option value="ingles">Inglês</option>
+          <option value="atualidades">Atualidades</option>
+          <option value="todos">Todas</option>
+        </select>
       </div>
 
       <div id="game">
-        <!--<div id="player"></div>-->
         <img id="player" src="./assets/menina-menino.png" alt="Personagem" />
         <div id="question-container">
           <div id="question"></div>
@@ -44,7 +56,7 @@
         <div id="feedback-msg"></div>
       </div>
 
-      <button id="startBtn">Iniciar</button>
+      <button id="startBtn" disabled>Iniciar</button>
       <button id="restartBtn">Reiniciar</button>
       <div id="message" class="hidden"></div>
     </div>
