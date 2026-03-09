@@ -345,3 +345,182 @@ h1 {
     top: 50px;
   }
 }
+
+/* ========== MEDIA QUERIES OTIMIZADAS ========== */
+
+/* Base para todos os tamanhos */
+#player {
+  position: absolute;
+  bottom: 15vh; /* Usa altura da viewport como referência */
+  left: 30px;
+  width: 70px;
+  height: 70px;
+  z-index: 10;
+  transition: bottom 0.1s; /* Suaviza ajustes */
+}
+
+/* Ajuste fino por altura de tela */
+@media (min-height: 700px) and (max-height: 800px) {
+  #player {
+    bottom: 16vh;
+  }
+}
+
+@media (min-height: 801px) and (max-height: 900px) {
+  #player {
+    bottom: 15vh;
+  }
+}
+
+@media (min-height: 901px) and (max-height: 1000px) {
+  #player {
+    bottom: 14vh; /* Telas mais altas precisam de menos % */
+  }
+}
+
+@media (min-height: 1001px) {
+  #player {
+    bottom: 13vh; /* Telas muito altas */
+  }
+}
+
+/* Telas pequenas (largura <= 600px) */
+@media (max-width: 600px) {
+  #score,
+  #errors,
+  #startBtn,
+  #restartBtn {
+    font-size: 0.9rem;
+  }
+
+  .seletor {
+    font-size: 0.7rem;
+    padding: 3px 5px;
+    min-width: 70px;
+  }
+
+  .seletores-topo {
+    top: 70px;
+    right: 5px;
+  }
+
+  #feedback-msg {
+    top: 50%; /* Melhor que margin-top */
+    transform: translate(-50%, -50%);
+  }
+
+  #player {
+    width: 60px;
+    height: 60px;
+    left: 15px;
+  }
+}
+
+/* Telas médias (601px - 768px) */
+@media (min-width: 601px) and (max-width: 768px) {
+  #score,
+  #errors,
+  #startBtn,
+  #restartBtn {
+    font-size: 1.5rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    padding: 15px 0;
+  }
+
+  #player {
+    width: 90px;
+    height: 90px;
+    left: 40px;
+    /* bottom herdado do base */
+  }
+
+  #question-container {
+    top: 80px;
+    padding: 15px 20px;
+    font-size: 1.2rem;
+  }
+
+  .option {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+  }
+
+  .seletores-topo {
+    top: 90px;
+  }
+}
+
+/* Telas grandes (900px+) */
+@media (min-width: 900px) {
+  h1 {
+    font-size: 2.5rem;
+    padding: 20px 0;
+  }
+
+  #question-container {
+    top: 100px;
+    padding: 20px 30px;
+    font-size: 1.5rem;
+    max-width: 700px;
+  }
+
+  #player {
+    width: 120px;
+    height: 120px;
+    left: 80px;
+  }
+}
+
+/* Telas extra grandes */
+@media (min-width: 1200px) {
+  #player {
+    width: 150px;
+    height: 150px;
+    left: 120px;
+  }
+}
+
+/* MODO PAISAGEM CORRIGIDO */
+@media (max-height: 600px) and (orientation: landscape) {
+  #score,
+  #errors,
+  #startBtn,
+  #restartBtn {
+    font-size: 0.9rem;
+  }
+
+  #game {
+    height: 100vh;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+    padding: 5px 0;
+  }
+
+  #player {
+    bottom: 10vh; /* Ajuste para paisagem */
+    width: 50px;
+    height: 50px;
+    left: 15px;
+  }
+
+  #question-container {
+    top: 30px;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    max-width: 80%;
+  }
+
+  .title img {
+    width: 50px;
+    margin: 5px 10px;
+  }
+
+  .seletores-topo {
+    top: 40px;
+  }
+}
