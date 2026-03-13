@@ -1,6 +1,6 @@
 // questionsGeografia.js
 
-export const questionsGeografia = {
+/*export const questionsGeografia = {
   ano6: [
     {
       question: "O que é paisagem natural?",
@@ -830,5 +830,949 @@ export const questionsGeografia = {
       ],
       answer: "Integração econômica e cultural mundial",
     },
+  ],
+};
+
+
+
+
+/* Questões da Professora Vera Belinato */
+
+// questionsGeografia.js
+
+// Função para embaralhar a posição da resposta correta
+function criarPergunta(question, respostaCorreta, alternativasErradas) {
+  // Criar array com todas as alternativas (erradas + correta)
+  const todasAlternativas = [...alternativasErradas, respostaCorreta];
+
+  // Embaralhar o array para que a correta não fique sempre na mesma posição
+  for (let i = todasAlternativas.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [todasAlternativas[i], todasAlternativas[j]] = [
+      todasAlternativas[j],
+      todasAlternativas[i],
+    ];
+  }
+
+  return {
+    question,
+    options: todasAlternativas,
+    answer: respostaCorreta,
+  };
+}
+
+export const questionsGeografia = {
+  ano6: [
+    criarPergunta("Água própria para beber.", "Água potável", [
+      "Água poluída",
+      "Água salgada",
+      "Água contaminada",
+      "Água suja",
+    ]),
+    criarPergunta(
+      "Processo em que a água vira vapor pelo calor do sol.",
+      "Evaporação",
+      ["Condensação", "Precipitação", "Infiltração", "Solidificação"],
+    ),
+    criarPergunta("Quando o vapor de água forma nuvens.", "Condensação", [
+      "Evaporação",
+      "Precipitação",
+      "Infiltração",
+      "Solidificação",
+    ]),
+    criarPergunta(
+      "Queda da água das nuvens em forma de chuva.",
+      "Precipitação",
+      ["Evaporação", "Condensação", "Infiltração", "Solidificação"],
+    ),
+    criarPergunta("Lugar onde nasce um rio.", "Nascente", [
+      "Foz",
+      "Afluente",
+      "Leito",
+      "Margem",
+    ]),
+    criarPergunta(
+      "Grande quantidade de água salgada que cobre grande parte da Terra.",
+      "Oceano",
+      ["Mar", "Lago", "Rio", "Golfo"],
+    ),
+    criarPergunta("Água encontrada em rios e lagos.", "Água doce", [
+      "Água salgada",
+      "Água salobra",
+      "Água poluída",
+      "Água mineral",
+    ]),
+    criarPergunta("Água com sal encontrada no mar.", "Água salgada", [
+      "Água doce",
+      "Água salobra",
+      "Água potável",
+      "Água mineral",
+    ]),
+    criarPergunta(
+      "Local onde a água é limpa para chegar às casas.",
+      "Estação de tratamento",
+      ["Represa", "Reservatório", "Nascente", "Rio"],
+    ),
+    criarPergunta("Água guardada no subsolo.", "Lençol freático", [
+      "Rio subterrâneo",
+      "Lago subterrâneo",
+      "Represa",
+      "Aquífero",
+    ]),
+    criarPergunta("Ação de sujar rios, mares e lagos.", "Poluição da água", [
+      "Preservação",
+      "Saneamento básico",
+      "Tratamento",
+      "Limpeza",
+    ]),
+    criarPergunta("Usar água de forma consciente.", "Economia de água", [
+      "Desperdício",
+      "Irrigação",
+      "Poluição",
+      "Consumo excessivo",
+    ]),
+    criarPergunta(
+      "Conjunto de processos que fazem a água circular na natureza.",
+      "Ciclo da água",
+      ["Tratamento da água", "Saneamento", "Hidrografia", "Poluição"],
+    ),
+    criarPergunta("Grande reservatório artificial de água.", "Represa", [
+      "Lago natural",
+      "Rio",
+      "Oceano",
+      "Mar",
+    ]),
+    criarPergunta("Curso natural de água que corre até o mar.", "Rio", [
+      "Lago",
+      "Represa",
+      "Oceano",
+      "Canal",
+    ]),
+    criarPergunta("Acúmulo de água cercado por terra.", "Lago", [
+      "Oceano",
+      "Mar",
+      "Rio",
+      "Córrego",
+    ]),
+    criarPergunta("Uso da água para molhar plantações.", "Irrigação", [
+      "Desperdício",
+      "Drenagem",
+      "Inundação",
+      "Poluição",
+    ]),
+    criarPergunta(
+      "Serviços que cuidam do tratamento de água e esgoto.",
+      "Saneamento básico",
+      ["Coleta de lixo", "Limpeza urbana", "Saúde pública", "Educação"],
+    ),
+    criarPergunta(
+      "Uso exagerado ou desperdício de água.",
+      "Desperdício de água",
+      ["Economia", "Conservação", "Reúso", "Preservação"],
+    ),
+    criarPergunta("Planeta conhecido como planeta azul.", "Terra", [
+      "Marte",
+      "Vênus",
+      "Júpiter",
+      "Saturno",
+    ]),
+    criarPergunta("A água é essencial para manter a...", "Vida", [
+      "Terra",
+      "Natureza",
+      "Atmosfera",
+      "Biodiversidade",
+    ]),
+    criarPergunta(
+      "Lugar onde a água é armazenada para abastecimento.",
+      "Reservatório",
+      ["Estação de tratamento", "Nascente", "Rio", "Córrego"],
+    ),
+    criarPergunta("Quando a água infiltra no solo.", "Infiltração", [
+      "Evaporação",
+      "Condensação",
+      "Precipitação",
+      "Transpiração",
+    ]),
+    criarPergunta("Mudança da água líquida para gelo.", "Congelamento", [
+      "Derretimento",
+      "Evaporação",
+      "Condensação",
+      "Fusão",
+    ]),
+    criarPergunta("Mudança do gelo para água líquida.", "Derretimento", [
+      "Congelamento",
+      "Evaporação",
+      "Solidificação",
+      "Condensação",
+    ]),
+    criarPergunta(
+      "Proteção da natureza e dos recursos hídricos.",
+      "Preservação",
+      ["Poluição", "Degradação", "Desmatamento", "Contaminação"],
+    ),
+    criarPergunta(
+      "Fenômeno da chuva muito forte em pouco tempo.",
+      "Tempestade",
+      ["Garoa", "Chuvisco", "Neblina", "Brisa"],
+    ),
+    criarPergunta(
+      "Água que cai lentamente do céu em pequenas gotas.",
+      "Garoa",
+      ["Tempestade", "Temporal", "Chuva forte", "Vendaval"],
+    ),
+    criarPergunta("Lugar onde a água dos rios encontra o mar.", "Foz do rio", [
+      "Nascente",
+      "Afluente",
+      "Margem",
+      "Leito",
+    ]),
+    criarPergunta("Camada de nuvens carregadas de chuva.", "Nuvem", [
+      "Neblina",
+      "Nevoeiro",
+      "Cerração",
+      "Bruma",
+    ]),
+  ],
+
+  // ANO 7
+  ano7: [
+    criarPergunta("Água própria para beber.", "Água potável", [
+      "Água mineral",
+      "Água destilada",
+      "Água da torneira",
+      "Água salgada",
+    ]),
+    criarPergunta(
+      "Processo em que a água vira vapor pelo calor do sol.",
+      "Evaporação",
+      ["Fervura", "Vaporização", "Ebulição", "Transpiração"],
+    ),
+    criarPergunta("Quando o vapor de água forma nuvens.", "Condensação", [
+      "Liquefação",
+      "Solidificação",
+      "Sublimação",
+      "Evaporação",
+    ]),
+    criarPergunta(
+      "Queda da água das nuvens em forma de chuva.",
+      "Precipitação",
+      ["Nevoeiro", "Neblina", "Umidade", "Orvalho"],
+    ),
+    criarPergunta("Lugar onde nasce um rio.", "Nascente", [
+      "Cabeceira",
+      "Fonte",
+      "Manancial",
+      "Poço",
+    ]),
+    criarPergunta(
+      "Grande quantidade de água salgada que cobre grande parte da Terra.",
+      "Oceano",
+      ["Mares", "Golfos", "Baias", "Estreitos"],
+    ),
+    criarPergunta("Água encontrada em rios e lagos.", "Água doce", [
+      "Água salobra",
+      "Água salgada",
+      "Água mineral",
+      "Água termal",
+    ]),
+    criarPergunta("Água com sal encontrada no mar.", "Água salgada", [
+      "Água do mar",
+      "Água oceânica",
+      "Água marinha",
+      "Água salobra",
+    ]),
+    criarPergunta(
+      "Local onde a água é limpa para chegar às casas.",
+      "Estação de tratamento",
+      ["ETA", "Filtro", "Estação de purificação", "Central de água"],
+    ),
+    criarPergunta("Água guardada no subsolo.", "Lençol freático", [
+      "Aquífero",
+      "Água subterrânea",
+      "Reservatório subterrâneo",
+      "Poço artesiano",
+    ]),
+    criarPergunta("Ação de sujar rios, mares e lagos.", "Poluição da água", [
+      "Contaminação",
+      "Degradação",
+      "Sujeira",
+      "Resíduos",
+    ]),
+    criarPergunta("Usar água de forma consciente.", "Economia de água", [
+      "Consumo consciente",
+      "Uso racional",
+      "Preservação",
+      "Conservação",
+    ]),
+    criarPergunta(
+      "Conjunto de processos que fazem a água circular na natureza.",
+      "Ciclo da água",
+      [
+        "Ciclo hidrológico",
+        "Processos hídricos",
+        "Circulação da água",
+        "Ciclo natural",
+      ],
+    ),
+    criarPergunta("Grande reservatório artificial de água.", "Represa", [
+      "Açude",
+      "Barragem",
+      "Reservatório",
+      "Dique",
+    ]),
+    criarPergunta("Curso natural de água que corre até o mar.", "Rio", [
+      "Córrego",
+      "Riacho",
+      "Ribeirão",
+      "Canal",
+    ]),
+    criarPergunta("Acúmulo de água cercado por terra.", "Lago", [
+      "Lagoa",
+      "Tanque",
+      "Poça",
+      "Alagado",
+    ]),
+    criarPergunta("Uso da água para molhar plantações.", "Irrigação", [
+      "Rega",
+      "Hidratação",
+      "Molhação",
+      "Agricultura",
+    ]),
+    criarPergunta(
+      "Serviços que cuidam do tratamento de água e esgoto.",
+      "Saneamento básico",
+      ["Saneamento", "Tratamento de água", "Limpeza pública", "Infraestrutura"],
+    ),
+    criarPergunta(
+      "Uso exagerado ou desperdício de água.",
+      "Desperdício de água",
+      ["Desperdício", "Abuso", "Mau uso", "Gasto excessivo"],
+    ),
+    criarPergunta("Planeta conhecido como planeta azul.", "Terra", [
+      "Mercúrio",
+      "Netuno",
+      "Saturno",
+      "Urano",
+    ]),
+    criarPergunta("A água é essencial para manter a...", "Vida", [
+      "Existência",
+      "Sobrevivência",
+      "Saúde",
+      "Biodiversidade",
+    ]),
+    criarPergunta(
+      "Lugar onde a água é armazenada para abastecimento.",
+      "Reservatório",
+      ["Caixa d'água", "Represa", "Depósito", "Tanque"],
+    ),
+    criarPergunta("Quando a água infiltra no solo.", "Infiltração", [
+      "Penetração",
+      "Absorção",
+      "Permeação",
+      "Drenagem",
+    ]),
+    criarPergunta("Mudança da água líquida para gelo.", "Congelamento", [
+      "Solidificação",
+      "Cristalização",
+      "Endurecimento",
+      "Gelo",
+    ]),
+    criarPergunta("Mudança do gelo para água líquida.", "Derretimento", [
+      "Fusão",
+      "Degelo",
+      "Liquefação",
+      "Descongelamento",
+    ]),
+    criarPergunta(
+      "Proteção da natureza e dos recursos hídricos.",
+      "Preservação",
+      ["Conservação", "Cuidado", "Proteção", "Defesa"],
+    ),
+    criarPergunta(
+      "Fenômeno da chuva muito forte em pouco tempo.",
+      "Tempestade",
+      ["Temporal", "Toró", "Pancada", "Chuvarada"],
+    ),
+    criarPergunta(
+      "Água que cai lentamente do céu em pequenas gotas.",
+      "Garoa",
+      ["Chuvisco", "Sereno", "Orvalho", "Nevoa"],
+    ),
+    criarPergunta("Lugar onde a água dos rios encontra o mar.", "Foz do rio", [
+      "Desembocadura",
+      "Encontro",
+      "Saída",
+      "Estuário",
+    ]),
+    criarPergunta("Camada de nuvens carregadas de chuva.", "Nuvem", [
+      "Nimbus",
+      "Cúmulos",
+      "Cirros",
+      "Estratos",
+    ]),
+  ],
+
+  // ANO 8
+  ano8: [
+    criarPergunta("Água própria para beber.", "Água potável", [
+      "Água pura",
+      "Água filtrada",
+      "Água limpa",
+      "Água cristalina",
+    ]),
+    criarPergunta(
+      "Processo em que a água vira vapor pelo calor do sol.",
+      "Evaporação",
+      ["Vaporização", "Evapotranspiração", "Transpiração", "Calor"],
+    ),
+    criarPergunta("Quando o vapor de água forma nuvens.", "Condensação", [
+      "Nebulosidade",
+      "Formação de nuvens",
+      "Neblina",
+      "Vapor",
+    ]),
+    criarPergunta(
+      "Queda da água das nuvens em forma de chuva.",
+      "Precipitação",
+      ["Chuva", "Pluviosidade", "Chuviscada", "Chuvas"],
+    ),
+    criarPergunta("Lugar onde nasce um rio.", "Nascente", [
+      "Origem",
+      "Fonte",
+      "Cabeceira",
+      "Início",
+    ]),
+    criarPergunta(
+      "Grande quantidade de água salgada que cobre grande parte da Terra.",
+      "Oceano",
+      ["Mar", "Golfo", "Canal", "Estreito"],
+    ),
+    criarPergunta("Água encontrada em rios e lagos.", "Água doce", [
+      "Água continental",
+      "Água superficial",
+      "Água doce superficial",
+      "Água de rio",
+    ]),
+    criarPergunta("Água com sal encontrada no mar.", "Água salgada", [
+      "Água marinha",
+      "Água oceânica",
+      "Água de mar",
+      "Água marítima",
+    ]),
+    criarPergunta(
+      "Local onde a água é limpa para chegar às casas.",
+      "Estação de tratamento",
+      [
+        "Centro de purificação",
+        "Estação de água",
+        "Filtro gigante",
+        "Estação de tratamento de água",
+      ],
+    ),
+    criarPergunta("Água guardada no subsolo.", "Lençol freático", [
+      "Água subterrânea",
+      "Aquífero",
+      "Reserva hídrica",
+      "Poço",
+    ]),
+    criarPergunta("Ação de sujar rios, mares e lagos.", "Poluição da água", [
+      "Contaminação",
+      "Poluição hídrica",
+      "Degradação aquática",
+      "Sujar",
+    ]),
+    criarPergunta("Usar água de forma consciente.", "Economia de água", [
+      "Economia",
+      "Uso racional",
+      "Conservação",
+      "Poupança de água",
+    ]),
+    criarPergunta(
+      "Conjunto de processos que fazem a água circular na natureza.",
+      "Ciclo da água",
+      [
+        "Ciclo hidrológico",
+        "Ciclo das águas",
+        "Processo hídrico",
+        "Ciclo natural",
+      ],
+    ),
+    criarPergunta("Grande reservatório artificial de água.", "Represa", [
+      "Barragem",
+      "Reservatório",
+      "Açude",
+      "Dique",
+    ]),
+    criarPergunta("Curso natural de água que corre até o mar.", "Rio", [
+      "Riacho",
+      "Córrego",
+      "Ribeirão",
+      "Canal",
+    ]),
+    criarPergunta("Acúmulo de água cercado por terra.", "Lago", [
+      "Lagoa",
+      "Alagado",
+      "Alagadiço",
+      "Pantanal",
+    ]),
+    criarPergunta("Uso da água para molhar plantações.", "Irrigação", [
+      "Regadio",
+      "Agropecuária",
+      "Agricultura irrigada",
+      "Hidratação",
+    ]),
+    criarPergunta(
+      "Serviços que cuidam do tratamento de água e esgoto.",
+      "Saneamento básico",
+      [
+        "Saneamento",
+        "Infraestrutura hídrica",
+        "Tratamento sanitário",
+        "Serviços de água",
+      ],
+    ),
+    criarPergunta(
+      "Uso exagerado ou desperdício de água.",
+      "Desperdício de água",
+      ["Desperdício", "Gasto excessivo", "Mau uso da água", "Abuso"],
+    ),
+    criarPergunta("Planeta conhecido como planeta azul.", "Terra", [
+      "Planeta água",
+      "Mundo azul",
+      "Globo terrestre",
+      "Planeta",
+    ]),
+    criarPergunta("A água é essencial para manter a...", "Vida", [
+      "Saúde",
+      "Natureza",
+      "Biodiversidade",
+      "Ecosistema",
+    ]),
+    criarPergunta(
+      "Lugar onde a água é armazenada para abastecimento.",
+      "Reservatório",
+      ["Caixa de água", "Tanque", "Cisterna", "Depósito"],
+    ),
+    criarPergunta("Quando a água infiltra no solo.", "Infiltração", [
+      "Percolação",
+      "Absorção",
+      "Penetração",
+      "Filtração",
+    ]),
+    criarPergunta("Mudança da água líquida para gelo.", "Congelamento", [
+      "Solidificação",
+      "Gelo",
+      "Cristalização",
+      "Resfriamento",
+    ]),
+    criarPergunta("Mudança do gelo para água líquida.", "Derretimento", [
+      "Fusão",
+      "Degelo",
+      "Descongelamento",
+      "Liquefação",
+    ]),
+    criarPergunta(
+      "Proteção da natureza e dos recursos hídricos.",
+      "Preservação",
+      [
+        "Preservação ambiental",
+        "Conservação",
+        "Proteção da água",
+        "Defesa ambiental",
+      ],
+    ),
+    criarPergunta(
+      "Fenômeno da chuva muito forte em pouco tempo.",
+      "Tempestade",
+      ["Temporal", "Chuva intensa", "Pancadão", "Toró"],
+    ),
+    criarPergunta(
+      "Água que cai lentamente do céu em pequenas gotas.",
+      "Garoa",
+      ["Chuva fina", "Chuvisco", "Sereno", "Orvalho"],
+    ),
+    criarPergunta("Lugar onde a água dos rios encontra o mar.", "Foz do rio", [
+      "Foz",
+      "Desembocadura",
+      "Estuário",
+      "Delta",
+    ]),
+    criarPergunta("Camada de nuvens carregadas de chuva.", "Nuvem", [
+      "Nuvens",
+      "Nuvens de chuva",
+      "Nimbostratus",
+      "Cumulonimbus",
+    ]),
+  ],
+
+  // ANO 9
+  ano9: [
+    criarPergunta("Água própria para beber.", "Água potável", [
+      "Água tratada",
+      "Água purificada",
+      "Água filtrada",
+      "Água limpa",
+    ]),
+    criarPergunta(
+      "Processo em que a água vira vapor pelo calor do sol.",
+      "Evaporação",
+      ["Transpiração", "Vaporização", "Evapotranspiração", "Calor"],
+    ),
+    criarPergunta("Quando o vapor de água forma nuvens.", "Condensação", [
+      "Nebulosidade",
+      "Liquefação",
+      "Vaporização",
+      "Resfriamento",
+    ]),
+    criarPergunta(
+      "Queda da água das nuvens em forma de chuva.",
+      "Precipitação",
+      ["Pluviosidade", "Chuva", "Queda d'água", "Chuvas"],
+    ),
+    criarPergunta("Lugar onde nasce um rio.", "Nascente", [
+      "Manancial",
+      "Fonte",
+      "Cabeceira",
+      "Poço",
+    ]),
+    criarPergunta(
+      "Grande quantidade de água salgada que cobre grande parte da Terra.",
+      "Oceano",
+      ["Massa oceânica", "Mar aberto", "Alto mar", "Oceano aberto"],
+    ),
+    criarPergunta("Água encontrada em rios e lagos.", "Água doce", [
+      "Água continental",
+      "Água superficial",
+      "Água potável",
+      "Água mineral",
+    ]),
+    criarPergunta("Água com sal encontrada no mar.", "Água salgada", [
+      "Água marinha",
+      "Água oceânica",
+      "Água salobra",
+      "Água salina",
+    ]),
+    criarPergunta(
+      "Local onde a água é limpa para chegar às casas.",
+      "Estação de tratamento",
+      [
+        "ETA",
+        "Estação de purificação",
+        "Central de tratamento",
+        "Estação de água",
+      ],
+    ),
+    criarPergunta("Água guardada no subsolo.", "Lençol freático", [
+      "Aquífero",
+      "Água subterrânea",
+      "Reserva hídrica",
+      "Poço artesiano",
+    ]),
+    criarPergunta("Ação de sujar rios, mares e lagos.", "Poluição da água", [
+      "Poluição hídrica",
+      "Contaminação",
+      "Degradação ambiental",
+      "Sujeira",
+    ]),
+    criarPergunta("Usar água de forma consciente.", "Economia de água", [
+      "Economia",
+      "Uso racional",
+      "Consumo consciente",
+      "Preservação",
+    ]),
+    criarPergunta(
+      "Conjunto de processos que fazem a água circular na natureza.",
+      "Ciclo da água",
+      [
+        "Ciclo hidrológico",
+        "Processos naturais",
+        "Circulação hídrica",
+        "Ciclo natural",
+      ],
+    ),
+    criarPergunta("Grande reservatório artificial de água.", "Represa", [
+      "Barragem",
+      "Açude",
+      "Reservatório artificial",
+      "Dique",
+    ]),
+    criarPergunta("Curso natural de água que corre até o mar.", "Rio", [
+      "Curso d'água",
+      "Fluxo hídrico",
+      "Canal natural",
+      "Córrego",
+    ]),
+    criarPergunta("Acúmulo de água cercado por terra.", "Lago", [
+      "Lagoa",
+      "Depósito natural",
+      "Bacia lacustre",
+      "Alagado",
+    ]),
+    criarPergunta("Uso da água para molhar plantações.", "Irrigação", [
+      "Agricultura",
+      "Agropecuária",
+      "Rega",
+      "Cultivo",
+    ]),
+    criarPergunta(
+      "Serviços que cuidam do tratamento de água e esgoto.",
+      "Saneamento básico",
+      [
+        "Saneamento",
+        "Infraestrutura",
+        "Serviços públicos",
+        "Tratamento sanitário",
+      ],
+    ),
+    criarPergunta(
+      "Uso exagerado ou desperdício de água.",
+      "Desperdício de água",
+      ["Desperdício", "Gasto excessivo", "Mau uso", "Desperdício hídrico"],
+    ),
+    criarPergunta("Planeta conhecido como planeta azul.", "Terra", [
+      "Globo",
+      "Planeta água",
+      "Mundo",
+      "Planeta Terra",
+    ]),
+    criarPergunta("A água é essencial para manter a...", "Vida", [
+      "Saúde",
+      "Existência",
+      "Sobrevivência",
+      "Natureza",
+    ]),
+    criarPergunta(
+      "Lugar onde a água é armazenada para abastecimento.",
+      "Reservatório",
+      ["Depósito", "Estoque hídrico", "Acumulação", "Caixa d'água"],
+    ),
+    criarPergunta("Quando a água infiltra no solo.", "Infiltração", [
+      "Percolação",
+      "Drenagem",
+      "Absorção",
+      "Penetração",
+    ]),
+    criarPergunta("Mudança da água líquida para gelo.", "Congelamento", [
+      "Solidificação",
+      "Gelo",
+      "Cristalização",
+      "Resfriamento",
+    ]),
+    criarPergunta("Mudança do gelo para água líquida.", "Derretimento", [
+      "Fusão",
+      "Degelo",
+      "Descongelamento",
+      "Liquefação",
+    ]),
+    criarPergunta(
+      "Proteção da natureza e dos recursos hídricos.",
+      "Preservação",
+      ["Conservação", "Proteção ambiental", "Cuidado ecológico", "Defesa"],
+    ),
+    criarPergunta(
+      "Fenômeno da chuva muito forte em pouco tempo.",
+      "Tempestade",
+      ["Tormenta", "Temporal", "Pancada forte", "Chuvarada"],
+    ),
+    criarPergunta(
+      "Água que cai lentamente do céu em pequenas gotas.",
+      "Garoa",
+      ["Chuvisco", "Pingos", "Orvalho", "Sereno"],
+    ),
+    criarPergunta("Lugar onde a água dos rios encontra o mar.", "Foz do rio", [
+      "Desembocadura",
+      "Estuário",
+      "Encontro das águas",
+      "Delta",
+    ]),
+    criarPergunta("Camada de nuvens carregadas de chuva.", "Nuvem", [
+      "Nuvem de chuva",
+      "Nimbus",
+      "Nebulosidade",
+      "Cúmulos",
+    ]),
+  ],
+
+  // GERAL
+  geral: [
+    criarPergunta("Água própria para beber.", "Água potável", [
+      "Água mineral",
+      "Água destilada",
+      "Água filtrada",
+      "Água da torneira",
+    ]),
+    criarPergunta(
+      "Processo em que a água vira vapor pelo calor do sol.",
+      "Evaporação",
+      ["Transpiração", "Vaporização", "Ebulição", "Fervura"],
+    ),
+    criarPergunta("Quando o vapor de água forma nuvens.", "Condensação", [
+      "Nebulosidade",
+      "Liquefação",
+      "Precipitação",
+      "Vapor",
+    ]),
+    criarPergunta(
+      "Queda da água das nuvens em forma de chuva.",
+      "Precipitação",
+      ["Chuva", "Pluviosidade", "Temporal", "Chuvas"],
+    ),
+    criarPergunta("Lugar onde nasce um rio.", "Nascente", [
+      "Fonte",
+      "Cabeceira",
+      "Manancial",
+      "Início",
+    ]),
+    criarPergunta(
+      "Grande quantidade de água salgada que cobre grande parte da Terra.",
+      "Oceano",
+      ["Mar", "Golfo", "Baía", "Canal"],
+    ),
+    criarPergunta("Água encontrada em rios e lagos.", "Água doce", [
+      "Água superficial",
+      "Água continental",
+      "Água potável",
+      "Água mineral",
+    ]),
+    criarPergunta("Água com sal encontrada no mar.", "Água salgada", [
+      "Água marinha",
+      "Água oceânica",
+      "Água salobra",
+      "Água salina",
+    ]),
+    criarPergunta(
+      "Local onde a água é limpa para chegar às casas.",
+      "Estação de tratamento",
+      ["ETA", "Central de purificação", "Filtro gigante", "Estação de água"],
+    ),
+    criarPergunta("Água guardada no subsolo.", "Lençol freático", [
+      "Aquífero",
+      "Água subterrânea",
+      "Reserva hídrica",
+      "Poço",
+    ]),
+    criarPergunta("Ação de sujar rios, mares e lagos.", "Poluição da água", [
+      "Contaminação",
+      "Poluição hídrica",
+      "Degradação aquática",
+      "Sujeira",
+    ]),
+    criarPergunta("Usar água de forma consciente.", "Economia de água", [
+      "Economia",
+      "Uso racional",
+      "Consumo consciente",
+      "Preservação",
+    ]),
+    criarPergunta(
+      "Conjunto de processos que fazem a água circular na natureza.",
+      "Ciclo da água",
+      [
+        "Ciclo hidrológico",
+        "Processos naturais",
+        "Circulação hídrica",
+        "Ciclo natural",
+      ],
+    ),
+    criarPergunta("Grande reservatório artificial de água.", "Represa", [
+      "Barragem",
+      "Açude",
+      "Reservatório",
+      "Dique",
+    ]),
+    criarPergunta("Curso natural de água que corre até o mar.", "Rio", [
+      "Curso d'água",
+      "Riacho",
+      "Córrego",
+      "Ribeirão",
+    ]),
+    criarPergunta("Acúmulo de água cercado por terra.", "Lago", [
+      "Lagoa",
+      "Alagado",
+      "Poça",
+      "Tanque",
+    ]),
+    criarPergunta("Uso da água para molhar plantações.", "Irrigação", [
+      "Rega",
+      "Agricultura",
+      "Agropecuária",
+      "Cultivo",
+    ]),
+    criarPergunta(
+      "Serviços que cuidam do tratamento de água e esgoto.",
+      "Saneamento básico",
+      [
+        "Saneamento",
+        "Infraestrutura",
+        "Serviços públicos",
+        "Tratamento sanitário",
+      ],
+    ),
+    criarPergunta(
+      "Uso exagerado ou desperdício de água.",
+      "Desperdício de água",
+      ["Desperdício", "Gasto excessivo", "Mau uso", "Abuso"],
+    ),
+    criarPergunta("Planeta conhecido como planeta azul.", "Terra", [
+      "Globo terrestre",
+      "Planeta água",
+      "Mundo azul",
+      "Planeta",
+    ]),
+    criarPergunta("A água é essencial para manter a...", "Vida", [
+      "Saúde",
+      "Natureza",
+      "Biodiversidade",
+      "Sobrevivência",
+    ]),
+    criarPergunta(
+      "Lugar onde a água é armazenada para abastecimento.",
+      "Reservatório",
+      ["Caixa d'água", "Depósito", "Tanque", "Cisterna"],
+    ),
+    criarPergunta("Quando a água infiltra no solo.", "Infiltração", [
+      "Percolação",
+      "Absorção",
+      "Penetração",
+      "Filtração",
+    ]),
+    criarPergunta("Mudança da água líquida para gelo.", "Congelamento", [
+      "Solidificação",
+      "Gelo",
+      "Cristalização",
+      "Resfriamento",
+    ]),
+    criarPergunta("Mudança do gelo para água líquida.", "Derretimento", [
+      "Fusão",
+      "Degelo",
+      "Descongelamento",
+      "Liquefação",
+    ]),
+    criarPergunta(
+      "Proteção da natureza e dos recursos hídricos.",
+      "Preservação",
+      ["Conservação", "Proteção ambiental", "Cuidado ecológico", "Defesa"],
+    ),
+    criarPergunta(
+      "Fenômeno da chuva muito forte em pouco tempo.",
+      "Tempestade",
+      ["Temporal", "Tormenta", "Pancada forte", "Chuvarada"],
+    ),
+    criarPergunta(
+      "Água que cai lentamente do céu em pequenas gotas.",
+      "Garoa",
+      ["Chuvisco", "Sereno", "Orvalho", "Nevoa"],
+    ),
+    criarPergunta("Lugar onde a água dos rios encontra o mar.", "Foz do rio", [
+      "Desembocadura",
+      "Estuário",
+      "Encontro das águas",
+      "Delta",
+    ]),
+    criarPergunta("Camada de nuvens carregadas de chuva.", "Nuvem", [
+      "Nuvens de chuva",
+      "Nimbus",
+      "Nebulosidade",
+      "Cúmulos",
+    ]),
   ],
 };
